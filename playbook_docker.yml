@@ -1,0 +1,27 @@
+---
+- name: docker and stuff
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: install docer and docker compose and ctop
+      pacman:
+        update_cache: yes
+        name:
+          - docker
+          - docker-compose
+          - ctop
+
+    - name: enable and start docker.service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add the user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+

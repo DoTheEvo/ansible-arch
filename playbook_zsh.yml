@@ -1,0 +1,48 @@
+---
+- name: zsh and zim
+  hosts: all
+
+  tasks:
+    - name: install base zsh and curl
+      become: yes
+      pacman:
+        update_cache: yes
+        name:
+          - zsh
+          - curl
+
+    - name: change shell
+      become: yes
+      user:
+        name: "{{ ansible_user }}"
+        shell: /bin/zsh
+
+    - name: install zimfw using its script
+      ignore_errors: yes
+      register: zimfw_output
+      shell: "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
+      args:
+        executable: /usr/bin/zsh
+      changed_when: "'already exists' not in zimfw_output.stderr"
+      failed_when: false
+
+    - name: change theme to steeef
+      ignore_errors: yes
+      # to source .zshrc "zsh -ic" is used, otherwise "command not found: zimfw"
+      shell: "zsh -ic 'echo zmodule steeef >> ~/.zimrc && zimfw install'"
+      args:
+        executable: /usr/bin/zsh
+      register: shell_result
+
+    - name: copy .myownrc
+      copy:
+        src: ./.myownrc
+        dest: ~/.myownrc
+        mode: '0644'
+
+    - name: link .myownrc in .zshrc
+      shell: "echo 'source ~/.myownrc' >> ~/.zshrc"
+      args:
+        executable: /usr/bin/zsh
+
+

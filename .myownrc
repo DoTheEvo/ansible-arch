@@ -1,0 +1,15 @@
+# aliases
+alias n='sudo -E nnn'
+alias statt='stat -c "%a %n" *'
+
+# ctr+f prepends sudo on current line
+add_sudo (){
+    BUFFER="sudo $BUFFER"
+    zle -w end-of-line
+}
+zle -N add_sudo
+bindkey "^f" add_sudo
+
+# setting default text editor
+export EDITOR=micro
+export VISUAL=micro

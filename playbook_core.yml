@@ -1,0 +1,138 @@
+---
+- name: archlinux base setup
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: install bunch of packages
+      pacman:
+        update_cache: yes
+        name:
+          - nano
+          - micro
+          - git
+          - curl
+          - wget
+          - nnn
+          - ncdu
+          - htop
+          - glances
+          - iproute2
+          - bind
+          - borg
+          - fuse
+          - python-llfuse
+          - python-pip
+          - python-setuptools
+          - python-pexpect
+
+    - name: disable password needed for pacman to allow yay install
+      lineinfile:
+        path: /etc/sudoers.d/temp-allow-no-pswd-pacman
+        state: present
+        line: "ALL ALL=NOPASSWD: /usr/bin/pacman"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+
+    - name: git clone yay-bin repo in to /tmp
+      become: no
+      git:
+        repo: 'https://aur.archlinux.org/yay-bin.git'
+        dest: /tmp/yay-bin
+        clone: yes
+
+    - name: install yay using makepkg
+      become: no
+      expect:
+        chdir: /tmp/yay-bin
+        command: makepkg -si
+        responses:
+          (?i)Proceed with installation: "y"
+
+    - name: re-enable need for password for pacman
+      file:
+        path: /etc/sudoers.d/temp-allow-no-pswd-pacman
+        state: absent
+
+    - name: enable color in pacman.conf
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^#Color$'
+        line: 'Color'
+
+    - name: fstab change relatime to noatime
+      replace:
+        path: /etc/fstab
+        regexp: 'relatime'
+        replace: 'noatime'
+
+    - name: install ssh
+      pacman:
+        name:
+          - openssh
+
+    - name: enable and start ssh service
+      systemd:
+        name: sshd
+        enabled: yes
+        state: started
+
+    - name: install cronie
+      pacman:
+        name:
+          - cronie
+
+    - name: enable and start cronie.service
+      systemd:
+        name: cronie
+        enabled: yes
+        state: started
+
+    - name: install util-linux
+      pacman:
+        name:
+          - util-linux
+
+    - name: enable and start weekly ssd disks trim using fstrim.timer
+      systemd:
+        name: fstrim.timer
+        enabled: yes
+        state: started
+
+    - name: install pacman-contrib
+      pacman:
+        name:
+          - pacman-contrib
+
+    - name: enable and start weekly cache cleanup paccache.timer
+      systemd:
+        name: paccache.timer
+        enabled: yes
+        state: started
+
+    - name: install reflector
+      pacman:
+        name:
+          - reflector
+
+    - name: write reflector configuration file
+      copy:
+        dest: '/etc/xdg/reflector/reflector.conf'
+        content: |
+          --save /etc/pacman.d/mirrorlist
+          --protocol http
+          --country SK,CZ,UA
+          --score 20
+          --sort rate
+
+    - name: enable and start reflector.timer
+      systemd:
+        name: reflector.timer
+        enabled: yes
+        state: started
+
+    - name: do initial run of reflector.service
+      systemd:
+        name: reflector
+        enabled: yes
+        state: started
