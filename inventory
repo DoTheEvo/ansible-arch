@@ -1,8 +1,9 @@
 [target_arch_machines]
 # 192.168.1.50
-localhost
+10.0.19.124
+# localhost
 
 [all:vars]
-# ansible_user=spravca
-# ansible_connection=ssh
-ansible_connection=local
+ansible_user=spravca
+ansible_connection=ssh
+# ansible_connection=local

@@ -25,9 +25,8 @@ To have a dedicated place where to write prefered applications, services, settin
 
 install arch linux, log in to a non root account that can sudo
 
-* install ansible and git - `sudo pacman -S ansible-core git`
-* install pacman module for ansible - `ansible-galaxy collection install community.general`
-* clone this repo - `git clone https://github.com/DoTheEvo/ansible.git`
+* install ansible and git - `sudo pacman -S ansible git`
+* clone this repo - `git clone https://github.com/DoTheEvo/ansible-arch.git`
 * enter the directory - `cd ansible`
 * run the playbooks you want
     * `ansible-playbook -u $USER -K playbook_core.yml`

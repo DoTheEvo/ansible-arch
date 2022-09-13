@@ -41,8 +41,7 @@
         mode: '0644'
 
     - name: link .myownrc in .zshrc
-      shell: "echo 'source ~/.myownrc' >> ~/.zshrc"
-      args:
-        executable: /usr/bin/zsh
-
+      lineinfile:
+        path: ~/.zshrc
+        line: 'source ~/.myownrc'
 
