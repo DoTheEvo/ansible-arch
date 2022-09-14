@@ -40,13 +40,13 @@ the `-K` is short for `--ask-become-pass` to prompt for $USER password
 
 #### playbook_core.yml
 
-* arch update, equivalent of `pacman -Syu`
+* arch upgrade, equivalent of `pacman -Syu`
 * various packages gets installed<br>
   nano, micro, git, curl, wget, nnn, ncdu, htop, glances, iproute2, bind, borg,
   fuse, python-llfuse, python-pip, python-setuptools, python-pexpect, 
 * install yay to have access to AUR
 * color is enabled in pacman.conf
-* noatime time is set in fstab to avoid unnecessary writes of relatime
+* noatime is set in fstab to avoid unnecessary writes of relatime
 * some services are installed and enabled
     * ssh - to access remotely
     * cronie - cron time scheduler
@@ -58,22 +58,25 @@ the `-K` is short for `--ask-become-pass` to prompt for $USER password
 #### playbook_zsh.yml
 
 * install zsh shell
-* change default shell for the user
+* change the default shell for the user
 * install zimfw using its own script
-* change theme to `steeef`
-* copy .myownrc with some predefined hotkeys and editor
+* change the theme to `steeef`
+* copy .myownrc with some predefined aliases, hotkeys and editor
 * source `.myownrc` in `.zshrc`
 
 #### playbook_docker.yml
 
 * install docker, docker-compose and ctop
 * enable and start docker service
-* add current user to the docker group to avoid need for sudo
+* add the current user to the docker group to avoid need for sudo
 
 
 ### Local deployment
 
-This is a local deployment.
-Meaning playbooks are run on the machine that is being *changed*.
-As oppose to more typical ansible use, where you run playbooks on your machine
-to *change* 219 virtual machines somewhere on cloud.
+This is for a local deployment.
+Meaning the machine is *changing* itself,
+as oppose to more typical ansible use, where you run playbooks on one machine
+to *change* 143 virtual machines somewhere on the cloud.
+
+To go from local to remote, edit inventory and remove local entry
+and add IP of machines you want to *change*.
