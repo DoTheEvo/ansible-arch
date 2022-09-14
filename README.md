@@ -18,7 +18,7 @@ Praised for simplicity.
 # Objective
 
 To clone a repo, execute few commands, wait,
-and BAM arch is suddenly just like you want it.<br>
+and BAM! Arch is suddenly just like you want it.<br>
 To have a dedicated place where to write prefered applications, services, settings,..
 
 # How to execute
@@ -36,40 +36,42 @@ install arch linux, log in to a non root account that can sudo
 *extra info:*<br>
 the `-K` is short for `--ask-become-pass` to prompt for $USER password
 
-# playbooks
+# Playbooks
 
 #### playbook_core.yml
 
+* arch update, equivalent of `pacman -Syu`
 * various packages gets installed<br>
-  nano, micro, git, curl, wget, nnn, htop, glances, iproute2, bind, borg, fuse, python-llfuse, python-pip, python-setuptools, python-pexpect, 
-* yay to access AUR
+  nano, micro, git, curl, wget, nnn, ncdu, htop, glances, iproute2, bind, borg,
+  fuse, python-llfuse, python-pip, python-setuptools, python-pexpect, 
+* install yay to have access to AUR
 * color is enabled in pacman.conf
 * noatime time is set in fstab to avoid unnecessary writes of relatime
 * some services are installed and enabled
+    * ssh - to access remotely
     * cronie - cron time scheduler
     * fstrim - for weekly ssd trim
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist
+* install micro text editor, copy configs, set it default in `.bashrc`
 
 #### playbook_zsh.yml
 
 * install zsh shell
+* change default shell for the user
 * install zimfw using its own script
 * change theme to `steeef`
 * copy .myownrc with some predefined hotkeys and editor
-* link .myownrc in .zshrc
-* change shell for the user
+* source `.myownrc` in `.zshrc`
 
 #### playbook_docker.yml
 
 * install docker, docker-compose and ctop
 * enable and start docker service
-* add user to the docker group to avoid need for sudo
+* add current user to the docker group to avoid need for sudo
 
 
-
-
-#### Local deployment
+### Local deployment
 
 This is a local deployment.
 Meaning playbooks are run on the machine that is being *changed*.
