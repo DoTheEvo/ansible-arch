@@ -23,9 +23,12 @@
           - git
           - curl
           - wget
+          - rsync
           - nnn
+          - unarchiver
           - ncdu
           - htop
+          - iotop
           - glances
           - iproute2
           - bind
@@ -80,6 +83,12 @@
         regexp: 'relatime'
         replace: 'noatime'
 
+    - name: change number of failed logins that triger 10min lockout
+      lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: '^# deny = 3$'
+        line: 'deny = 10'
+
 # SSH ------------------------------------------------------------------------
 
     - name: install ssh
@@ -90,6 +99,19 @@
     - name: enable and start ssh service
       systemd:
         name: sshd
+        enabled: yes
+        state: started
+
+# LOCATE THE QUICK FILE SEARCH------------------------------------------------
+
+    - name: install plocate
+      pacman:
+        name:
+          - plocate
+
+    - name: enable and start ~12h updatedb timer
+      systemd:
+        name: plocate-updatedb.timer
         enabled: yes
         state: started
 
@@ -113,7 +135,7 @@
         name:
           - util-linux
 
-    - name: enable and start weekly ssd disks trim using fstrim.timer
+    - name: enable and start weekly ssd disks trim using fstrim timer
       systemd:
         name: fstrim.timer
         enabled: yes
@@ -126,13 +148,13 @@
         name:
           - pacman-contrib
 
-    - name: enable and start weekly cache cleanup paccache.timer
+    - name: enable and start weekly cache cleanup paccache timer
       systemd:
         name: paccache.timer
         enabled: yes
         state: started
 
-# REFLECTOR TO REGULARLY UPDATE MIRRORLIST  ----------------------------------
+# REFLECTOR TO REGULARLY UPDATE MIRRORLIST  ---- CHANGE COUNTRY CODES !!! ----
 
     - name: install reflector
       pacman:
@@ -149,7 +171,7 @@
           --score 20
           --sort rate
 
-    - name: enable and start reflector.timer
+    - name: enable and start reflector timer
       systemd:
         name: reflector.timer
         enabled: yes
@@ -186,4 +208,29 @@
           export EDITOR=micro
           export VISUAL=micro
 
-# ----------------------------------------------------------------------------
+# Neofetch  ------------------------------------------------------------------
+
+    - name: install neofetch
+      pacman:
+        name:
+          - neofetch
+
+    - name: run neofetch to generate config
+      become: no
+      command: neofetch
+
+    - name: enable disk info in neofetch
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Disk" disk$'
+        line: '    info "Disk" disk'
+
+    - name: enable local IP info in neofetch
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Local IP" local_ip$'
+        line: '    info "Local IP" local_ip'
+
+#  ---------------------------------------------------------------------------

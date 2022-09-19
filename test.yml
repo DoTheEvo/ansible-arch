@@ -1,0 +1,33 @@
+---
+- name: zsh and zim
+  hosts: all
+  become: yes
+
+  tasks:
+
+# LOCATE THE QUICK FILE SEARCH------------------------------------------------
+
+    - name: install neofetch
+      pacman:
+        name:
+          - neofetch
+
+    - name: run neofetch to generate config
+      become: no
+      command:
+        cmd: neofetch
+
+    - name: enable color in pacman.conf
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Disk" disk$'
+        line: '    info "Disk" disk'
+
+    - name: enable color in pacman.conf
+      become: no
+      lineinfile:
+        path: ~/.config/neofetch/config.conf
+        regexp: '.*# info "Local IP" local_ip$'
+        line: '    info "Local IP" local_ip'
+

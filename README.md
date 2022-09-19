@@ -18,7 +18,7 @@ Praised for simplicity.
 # Objective
 
 To clone a repo, execute few commands, wait,
-and BAM! Arch is suddenly just like you want it.<br>
+BAM! Arch is suddenly just like you want it.<br>
 To have a dedicated place where to write prefered applications, services, settings,..
 
 # How to execute
@@ -40,10 +40,14 @@ the `-K` is short for `--ask-become-pass` to prompt for $USER password
 
 #### playbook_core.yml
 
+Aimed at non-X deployment. When arch as docker host, or wireguard node or 
+a web server or whatever else terminal based.
+
 * arch upgrade, equivalent of `pacman -Syu`
 * various packages gets installed<br>
-  nano, micro, git, curl, wget, nnn, ncdu, htop, glances, iproute2, bind, borg,
-  fuse, python-llfuse, python-pip, python-setuptools, python-pexpect, 
+  nano, micro, git, curl, wget, rsync, nnn, unarchiver, ncdu, htop, iotop,
+  glances, iproute2, bind, borg, fuse,
+  python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
 * color is enabled in pacman.conf
 * noatime is set in fstab to avoid unnecessary writes of relatime
@@ -56,6 +60,8 @@ the `-K` is short for `--ask-become-pass` to prompt for $USER password
 * install micro text editor, copy configs, set it default in `.bashrc`
 
 #### playbook_zsh.yml
+
+Get zsh with some sane framework to not feel like neanderthal with bash. 
 
 * install zsh shell
 * change the default shell for the user
