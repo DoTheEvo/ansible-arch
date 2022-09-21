@@ -34,7 +34,8 @@ install arch linux, log in to a non root account that can sudo
     * `ansible-playbook -u $USER -K playbook_docker.yml`
 
 *extra info:*<br>
-the `-K` is short for `--ask-become-pass` to prompt for $USER password
+yes, you write `$USER` there, which puts in the user you are logged in <br>
+the `-K` is short for `--ask-become-pass` which will prompt for password
 
 # Playbooks
 
@@ -51,15 +52,17 @@ a web server or whatever else terminal based.
 * install yay to have access to AUR
 * color is enabled in pacman.conf
 * noatime is set in fstab to avoid unnecessary writes of relatime
+* increase allowed failed logins to 10 before lock out
 * some services are installed and enabled
     * ssh - to access remotely
+    * plocate - locate search
     * cronie - cron time scheduler
     * fstrim - for weekly ssd trim
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist
 * install micro text editor, copy configs, set it default in `.bashrc`
 * install neofetch
-* check if virtual machine and if vmware, hyperv, or virtualbox then
+* check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
 
 #### playbook_zsh.yml
@@ -67,7 +70,7 @@ a web server or whatever else terminal based.
 Get zsh with some sane framework to not feel like neanderthal with bash. 
 
 * install zsh shell
-* change the default shell for the user
+* change the default shell from bash to zsh for the user
 * install zimfw using its own script
 * change the theme to `steeef`
 * copy .myownrc with some predefined aliases, hotkeys and editor
