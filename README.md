@@ -58,6 +58,9 @@ a web server or whatever else terminal based.
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist
 * install micro text editor, copy configs, set it default in `.bashrc`
+* install neofetch
+* check if virtual machine and if vmware, hyperv, or virtualbox then
+  install and enable supporting services
 
 #### playbook_zsh.yml
 

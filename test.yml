@@ -1,5 +1,5 @@
 ---
-- name: zsh and zim
+- name: test
   hosts: all
   become: yes
 
@@ -7,27 +7,64 @@
 
 # LOCATE THE QUICK FILE SEARCH------------------------------------------------
 
-    - name: install neofetch
+    - name: get virtual enviroment info
+      command: /usr/bin/systemd-detect-virt
+      register: virtualization_type
+
+    - name: if vmware, install open-vm-tools
       pacman:
         name:
-          - neofetch
+          - open-vm-tools
+      when: virtualization_type.stdout == 'vmware'
 
-    - name: run neofetch to generate config
-      become: no
-      command:
-        cmd: neofetch
+    - name: if vmware, enable and start vmware open tools services
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+          - vmtoolsd.service
+          - vmware-vmblock-fuse.service
+      when: virtualization_type.stdout == 'vmware'
 
-    - name: enable color in pacman.conf
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Disk" disk$'
-        line: '    info "Disk" disk'
 
-    - name: enable color in pacman.conf
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Local IP" local_ip$'
-        line: '    info "Local IP" local_ip'
 
+
+
+      # - name: restart sensu-services
+      #   service:
+      #     name: "{{ item }}"
+      #     state: restarted
+      #   with_items:
+      #     - sensu-api
+      #     - sensu-client
+      #     - sensu-server
+
+
+   # - name: Facts
+   #   setup:
+   # - name: Dump
+   #   run_once: true
+   #   copy:
+   #     content: "{{ hostvars[inventory_hostname] | to_nice_json }}"
+   #     dest: /tmp/setup-dump53.json
+   #   when: ansible_virtualization_type == 'VMware'
+
+
+
+# - hosts: node1
+#   gather_facts: yes
+#   tasks:
+#    - name: Check File
+#      shell: ls -ld /etc/postfix/post-install
+#      register: result
+#      ignore_errors: yes
+
+#    - name: Define Variable
+#      set_fact:
+#          exists: "{{ result.stdout }}"
+#      when: result|success
+
+#    - name: Display Variable
+#      debug: msg="{{ exists }}"
+#      ignore_errors: yes

@@ -208,7 +208,7 @@
           export EDITOR=micro
           export VISUAL=micro
 
-# Neofetch  ------------------------------------------------------------------
+# NEOFETCH  ------------------------------------------------------------------
 
     - name: install neofetch
       pacman:
@@ -232,5 +232,71 @@
         path: ~/.config/neofetch/config.conf
         regexp: '.*# info "Local IP" local_ip$'
         line: '    info "Local IP" local_ip'
+
+# HYPERV  --------------------------------------------------------------------
+
+    - name: get virtual enviroment info
+      command: /usr/bin/systemd-detect-virt
+      register: virtualization_type
+
+    - name: if hyperv, install hyperv package
+      pacman:
+        name:
+          - hyperv
+      when: virtualization_type.stdout == 'microsoft'
+
+    - name: if hyperv, enable and start hyperv integration services
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+          - hv_fcopy_daemon.service
+          - hv_kvp_daemon.service
+          - hv_vss_daemon.service
+      when: virtualization_type.stdout == 'microsoft'
+
+# VMWARE  --------------------------------------------------------------------
+
+    - name: get virtual enviroment info
+      command: /usr/bin/systemd-detect-virt
+      register: virtualization_type
+
+    - name: if vmware, install open-vm-tools
+      pacman:
+        name:
+          - open-vm-tools
+      when: virtualization_type.stdout == 'vmware'
+
+    - name: if vmware, enable and start vmware open tools services
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+          - vmtoolsd.service
+          - vmware-vmblock-fuse.service
+      when: virtualization_type.stdout == 'vmware'
+
+# VIRTUALBOX  ---------------------------------------------------------------
+
+    - name: get virtual enviroment info
+      command: /usr/bin/systemd-detect-virt
+      register: virtualization_type
+
+    - name: if virtualbox, install guest additions NON-X version
+      pacman:
+        name:
+          - virtualbox-guest-utils-nox
+      when: virtualization_type.stdout == 'oracle'
+
+    - name: if virtualbox, enable and start vboxservice
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+          - vboxservice.service
+      when: virtualization_type.stdout == 'oracle'
 
 #  ---------------------------------------------------------------------------
