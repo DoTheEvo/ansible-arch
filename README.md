@@ -12,14 +12,27 @@ It executes commands from `playbooks` on machines listed in `inventory`.
 Open source. Developed by Red Hat.
 Written and dependent on python. Uses YAML formatting configuration.
 Agent-less, just machines with ssh+python (linux) or
-rdp+powershell (windows).<br>
+winrm+powershell (windows).<br>
 Praised for simplicity.
 
-# Objective
+Objective here is to clone a repo, execute few commands, wait,
+BAM! Arch is suddenly just like you want it.
+And to have a dedicated place where to write prefered applications, services, settings,..
 
-To clone a repo, execute few commands, wait,
-BAM! Arch is suddenly just like you want it.<br>
-To have a dedicated place where to write prefered applications, services, settings,..
+# Files and directory structure
+
+```
+/home/
+└── ~/
+    └── ansible-arch/
+        ├── .myownrc - own rc for zsh
+        ├── README.md - this file you reading
+        ├── ansible.cfg - config with python path and inventory file name
+        ├── inventory - which machines targeting, set to localhost
+        ├── playbook_core.yml
+        ├── playbook_docker.yml
+        └── playbook_zsh.yml
+```
 
 # How to execute
 
@@ -41,7 +54,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 #### playbook_core.yml
 
-Aimed at non-X deployment. When arch as docker host, or wireguard node or 
+Aimed at non-X deployment. When running arch as docker host, or wireguard node or 
 a web server or whatever else terminal based.
 
 * arch upgrade, equivalent of `pacman -Syu`
@@ -54,12 +67,12 @@ a web server or whatever else terminal based.
 * noatime is set in fstab to avoid unnecessary writes of relatime
 * increase allowed failed logins to 10 before lock out
 * some services are installed and enabled
-    * ssh - to access remotely
-    * plocate - locate search
+    * ssh - for remote access
+    * plocate - file search locate
     * cronie - cron time scheduler
     * fstrim - for weekly ssd trim
     * paccache - for weekly clearing of pacman cache
-    * reflector - for weekly update of mirrorlist
+    * reflector - for weekly update of mirrorlist (change country codes)
 * install micro text editor, copy configs, set it default in `.bashrc`
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
