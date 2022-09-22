@@ -8,6 +8,6 @@ localhost
 [all:vars]
 ansible_connection=local
 # ansible_connection=ssh
-ansible_user=spravca
+# ansible_user=spravca
 # ansible_ssh_pass=aaa
 # ansible_sudo_pass=aaa
