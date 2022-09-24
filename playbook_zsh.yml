@@ -1,5 +1,5 @@
 ---
-- name: zsh and zim
+- name: playbook_zsh.yml - zsh and zim setup
   hosts: all
 
   tasks:

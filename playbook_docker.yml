@@ -1,5 +1,5 @@
 ---
-- name: docker and stuff
+- name: playbook_docker.yml - docker and stuff
   hosts: all
   become: yes
 

@@ -1,5 +1,5 @@
 ---
-- name: archlinux base setup
+- name: playbook_core.yml - archlinux base setup
   hosts: all
   become: yes
 

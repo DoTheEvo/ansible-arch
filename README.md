@@ -10,29 +10,15 @@ Ansible is an automation platform.<br>
 It executes commands from `playbooks` on machines listed in `inventory`.
 
 Open source. Developed by Red Hat.
-Written and dependent on python. Uses YAML formatting configuration.
+Written and dependent on python. Uses YAML formatting.
 Agent-less, just machines with ssh+python (linux) or
 winrm+powershell (windows).<br>
 Praised for simplicity.
 
 Objective here is to clone a repo, execute few commands, wait,
-BAM! Arch is suddenly just like you want it.
-And to have a dedicated place where to write prefered applications, services, settings,..
-
-# Files and directory structure
-
-```
-/home/
-└── ~/
-    └── ansible-arch/
-        ├── .myownrc - own rc for zsh
-        ├── README.md - this file you reading
-        ├── ansible.cfg - config with python path and inventory file name
-        ├── inventory - which machines targeting, set to localhost
-        ├── playbook_core.yml
-        ├── playbook_docker.yml
-        └── playbook_zsh.yml
-```
+BAM! Arch is suddenly just like you want it.<br>
+And to have a dedicated place where to write prefered applications,
+services, settings,.. once you discover them.
 
 # How to execute
 
@@ -54,18 +40,18 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 #### playbook_core.yml
 
-Aimed at non-X deployment. When running arch as docker host, or wireguard node or 
-a web server or whatever else terminal based.
+Aimed at non-X use. When running arch as a docker host,
+or wireguard node, or a web server or whatever else terminal based.
 
 * arch upgrade, equivalent of `pacman -Syu`
 * various packages gets installed<br>
   nano, micro, git, curl, wget, rsync, nnn, unarchiver, ncdu, htop, iotop,
-  glances, iproute2, bind, borg, fuse,
+  glances, iproute2, bind, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
 * color is enabled in pacman.conf
 * noatime is set in fstab to avoid unnecessary writes of relatime
-* increase allowed failed logins to 10 before lock out
+* increased allowed failed login attemps to 10 before lock out
 * some services are installed and enabled
     * ssh - for remote access
     * plocate - file search locate
@@ -73,7 +59,8 @@ a web server or whatever else terminal based.
     * fstrim - for weekly ssd trim
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist (change country codes)
-* install micro text editor, copy configs, set it default in `.bashrc`
+* install micro text editor, copy configs,
+  set micro as the default editor in `.bashrc`
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
