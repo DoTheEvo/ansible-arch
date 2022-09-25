@@ -58,7 +58,7 @@ or wireguard node, or a web server or whatever else terminal based.
     * plocate - file search locate
     * cronie - cron time scheduler
     * fstrim - for weekly ssd trim
-    * trash-cli - trash functionality plus regular trash cleanup
+    * trash-cli - delete to trash
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist (change country codes)
 * install micro text editor, copy configs,
@@ -97,8 +97,15 @@ to *change* 143 virtual machines somewhere on the cloud.
 To go from local to remote, edit inventory and remove local entries
 and add IP of machines you want to *change*.
 
-# Userful stuff
+# Useful
 
 * `systemctl list-units --type=service --state=active`
 * `systemctl list-units --type=timer --state=active`
 * `ss -tulpn`
+   show what uses which port
+* `rsync -ah --info=progress2`
+* `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
+* `lspci -k`
+* `journalctl -b -r`
+* `cat /proc/cmdline`
+* `sudo nc -l -p 6112` -> port forwarding on router -> https://www.grc.com/x/portprobe=6112

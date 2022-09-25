@@ -11,6 +11,14 @@
           - zsh
           - curl
 
+    - name: write last bash history in to .bash_history
+      shell: history -a
+
+    - name: create .zhistory from .bash_history
+      shell: strings -eS .bash_history >> .zhistory
+      args:
+        executable: /usr/bin/bash
+
     - name: change shell
       become: yes
       user:
