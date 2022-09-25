@@ -99,6 +99,6 @@ and add IP of machines you want to *change*.
 
 # Userful stuff
 
-`systemctl list-units --type=service --state=active`
-`systemctl list-units --type=timer --state=active`
-`ss -tulpn`
+* `systemctl list-units --type=service --state=active`
+* `systemctl list-units --type=timer --state=active`
+* `ss -tulpn`
