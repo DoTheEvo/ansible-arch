@@ -24,8 +24,10 @@
           - curl
           - wget
           - rsync
+          - bat
           - nnn
           - unarchiver
+          - duf
           - ncdu
           - htop
           - iotop
@@ -93,7 +95,7 @@
       lineinfile:
         path: /etc/sudoers.d/no-pswd-nnn
         state: present
-        line: "ALL ALL=NOPASSWD: /usr/bin/nnn"
+        line: "ALL ALL=NOPASSWD:SETENV: /usr/bin/nnn"
         validate: /usr/sbin/visudo -cf %s
         create: yes
 

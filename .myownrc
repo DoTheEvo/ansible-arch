@@ -9,11 +9,13 @@ export VISUAL=micro
 
 # show numerical permissions of content of the current directory
 alias statt='stat -c "%A %a %n" *'
+# ip command with colors
+alias ip='ip --color=auto'
 
 # ----------------------------------------------------------------------------
 # NNN FILE MANAGER  ----------------------------------------------------------
 
-# n runs nnn with as root but keep users environmental variables
+# n runs nnn as root but keeps users environmental variables
 # it also shows hidden files
 alias n='sudo -E nnn -H'
 
@@ -22,7 +24,7 @@ export NNN_TRASH=1
 export NNN_COLORS='2136'
 export NNN_BMS='e:/etc;u:~;'
 
-# to indicate in shell that it was open from nnn wihting nnn with ! hotkey
+# shell opened from nnn using ! hotkey has indication of depth
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
 
 # ----------------------------------------------------------------------------
@@ -36,4 +38,5 @@ add_sudo (){
 zle -N add_sudo
 bindkey "^f" add_sudo
 
+# ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------

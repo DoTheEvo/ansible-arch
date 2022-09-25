@@ -40,7 +40,7 @@
         dest: ~/.myownrc
         mode: '0644'
 
-    - name: link .myownrc in .zshrc
+    - name: source .myownrc in .zshrc
       lineinfile:
         path: ~/.zshrc
         line: 'source ~/.myownrc'

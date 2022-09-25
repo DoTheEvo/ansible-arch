@@ -45,18 +45,20 @@ or wireguard node, or a web server or whatever else terminal based.
 
 * arch upgrade, equivalent of `pacman -Syu`
 * various packages gets installed<br>
-  nano, micro, git, curl, wget, rsync, nnn, unarchiver, ncdu, htop, iotop,
-  glances, iproute2, bind, fuse,
-  python-llfuse, python-pip, python-setuptools, python-pexpect
+  nano, micro, git, curl, wget, rsync, bat, nnn, unarchiver, duf, ncdu, htop,
+  iotop, glances, iproute2, bind, borg, fuse,
+  python-llfuse, python-pip, python-setuptools
 * install yay to have access to AUR
 * color is enabled in pacman.conf
 * noatime is set in fstab to avoid unnecessary writes of relatime
 * increased allowed failed login attemps to 10 before lock out
+* no sudo password needed for nnn editor
 * some services are installed and enabled
     * ssh - for remote access
     * plocate - file search locate
     * cronie - cron time scheduler
     * fstrim - for weekly ssd trim
+    * trash-cli - trash functionality plus regular trash cleanup
     * paccache - for weekly clearing of pacman cache
     * reflector - for weekly update of mirrorlist (change country codes)
 * install micro text editor, copy configs,
@@ -69,13 +71,13 @@ or wireguard node, or a web server or whatever else terminal based.
 
 ![steeef-theme](https://i.imgur.com/ZAvdYSU.png)
 
-Get zsh with some sane framework to not feel like neanderthal with bash. 
+Sets zsh with some sane framework to not feel like neanderthal with bash.
 
 * install zsh shell
 * change the default shell from bash to zsh for the user
 * install zimfw using its own script
 * change the theme to `steeef`
-* copy .myownrc with some predefined aliases, hotkeys and editor
+* copy .myownrc with various predefined stuff
 * source `.myownrc` in `.zshrc`
 
 #### playbook_docker.yml
@@ -92,5 +94,11 @@ Meaning the machine is *changing* itself,
 as oppose to more typical ansible use, where you run playbooks on one machine
 to *change* 143 virtual machines somewhere on the cloud.
 
-To go from local to remote, edit inventory and remove local entry
+To go from local to remote, edit inventory and remove local entries
 and add IP of machines you want to *change*.
+
+# Userful stuff
+
+`systemctl list-units --type=service --state=active`
+`systemctl list-units --type=timer --state=active`
+`ss -tulpn`
