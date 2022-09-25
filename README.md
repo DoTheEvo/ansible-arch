@@ -67,6 +67,8 @@ or wireguard node, or a web server or whatever else terminal based.
 
 #### playbook_zsh.yml
 
+![steeef-theme](https://i.imgur.com/ZAvdYSU.png)
+
 Get zsh with some sane framework to not feel like neanderthal with bash. 
 
 * install zsh shell

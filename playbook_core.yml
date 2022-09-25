@@ -89,6 +89,14 @@
         regexp: '^# deny = 3$'
         line: 'deny = 10'
 
+    - name: disable need for sudo password for nnn
+      lineinfile:
+        path: /etc/sudoers.d/no-pswd-nnn
+        state: present
+        line: "ALL ALL=NOPASSWD: /usr/bin/nnn"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+
 # SSH ------------------------------------------------------------------------
 
     - name: install ssh
@@ -138,6 +146,44 @@
     - name: enable and start weekly ssd disks trim using fstrim timer
       systemd:
         name: fstrim.timer
+        enabled: yes
+        state: started
+
+# TRASH SETUP ----------------------------------------------------------------
+
+    - name: install trash-cli
+      pacman:
+        name:
+          - trash-cli
+
+    - name: create trash-empty.service file
+      copy:
+        dest: '/etc/systemd/system/trash-empty.service'
+        content: |
+          [Unit]
+          Description=Empty trash older than 30 days
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/bin/trash-empty 30
+
+    - name: create trash-empty.timer file
+      copy:
+        dest: '/etc/systemd/system/trash-empty.timer'
+        content: |
+          [Unit]
+          Description=Empty trash older than 30 days daily
+
+          [Timer]
+          OnCalendar=daily
+          Persistent=true
+
+          [Install]
+          WantedBy=timers.target
+
+    - name: enable and start trash-empty.timer
+      systemd:
+        name: trash-empty.timer
         enabled: yes
         state: started
 
