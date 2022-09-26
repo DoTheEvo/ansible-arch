@@ -9,7 +9,7 @@
 Ansible is an automation platform.<br>
 It executes tasks from `playbooks` on machines listed in `inventory`.
 
-Open source. Developed by Red Hat.
+Open source, developed by Red Hat.
 Written and dependent on python. Uses YAML formatting.
 Agent-less, just machines with ssh+python (linux) or
 winrm+powershell (windows).<br>
@@ -18,7 +18,7 @@ Praised for simplicity.
 Objective here is to clone a repo, execute few commands, wait,
 BAM! Arch is suddenly just like you want it.<br>
 And to have a dedicated place where to write prefered applications,
-services, settings,.. once you discover them.
+services, settings,.. once they are discovered.
 
 # How to execute
 
@@ -38,7 +38,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 # Playbooks
 
-#### playbook_core.yml
+### playbook_core.yml
 
 Aimed at non-X use. When running arch as a docker host,
 or wireguard node, or a web server or whatever else terminal based.
@@ -67,7 +67,7 @@ or wireguard node, or a web server or whatever else terminal based.
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
 
-#### playbook_zsh.yml
+### playbook_zsh.yml
 
 ![steeef-theme](https://i.imgur.com/ZAvdYSU.png)
 
@@ -81,7 +81,7 @@ Sets zsh with some sane framework to not feel like neanderthal with bash.
 * copy .myownrc with various predefined stuff
 * source `.myownrc` in `.zshrc`
 
-#### playbook_docker.yml
+### playbook_docker.yml
 
 * install docker, docker-compose and ctop
 * enable and start docker service
