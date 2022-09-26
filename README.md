@@ -7,7 +7,7 @@
 # Overview
 
 Ansible is an automation platform.<br>
-It executes commands from `playbooks` on machines listed in `inventory`.
+It executes tasks from `playbooks` on machines listed in `inventory`.
 
 Open source. Developed by Red Hat.
 Written and dependent on python. Uses YAML formatting.
@@ -74,6 +74,7 @@ or wireguard node, or a web server or whatever else terminal based.
 Sets zsh with some sane framework to not feel like neanderthal with bash.
 
 * install zsh shell
+* copy bash history in to .zhistory
 * change the default shell from bash to zsh for the user
 * install zimfw using its own script
 * change the theme to `steeef`
