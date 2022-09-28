@@ -1,6 +1,6 @@
 # Ansible Arch Linux
 
-![Logo](https://i.imgur.com/5BJIQHk.png)
+![Logo](https://i.imgur.com/yAyr3S2.png)
 
 [Learning ansible?](https://www.youtube.com/watch?v=goclfp6a2IQ&list=PL2_OBreMn7FqZkvMYt6ATmgC0KAGGJNAN)
 
