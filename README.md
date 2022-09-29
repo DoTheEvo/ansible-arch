@@ -1,4 +1,4 @@
-# Ansible Arch Linux
+# Ansible Arch
 
 ![Logo](https://i.imgur.com/yAyr3S2.png)
 
@@ -10,15 +10,15 @@ Ansible is an automation platform.<br>
 It executes tasks from `playbooks` on machines listed in `inventory`.
 
 Open source, developed by Red Hat.
-Written and dependent on python. Uses YAML formatting.
-Agent-less, just machines with ssh+python (linux) or
+Written and dependent on python. Uses YAML configuration files.
+Agent-less, controled machines need just ssh+python (linux) or
 winrm+powershell (windows).<br>
 Praised for simplicity.
 
 Objective here is to clone a repo, execute few commands, wait,
 BAM! Arch is suddenly just like you want it.<br>
-And to have a dedicated place where to write prefered applications,
-services, settings,.. once they are discovered.
+Also to have a dedicated place to write prefered applications,
+services, settings,.. 
 
 # How to execute
 
@@ -40,20 +40,19 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 ### playbook_core.yml
 
-Aimed at non-X use. When running arch as a docker host,
-or wireguard node, or a web server or whatever else terminal based.
+useful terminal progams, settings, maintance services, 
 
 * arch upgrade, equivalent of `pacman -Syu`
-* various packages gets installed<br>
+* install this:<br>
   nano, micro, git, curl, wget, rsync, bat, nnn, unarchiver, duf, ncdu, htop,
   iotop, glances, iproute2, bind, borg, fuse,
   python-llfuse, python-pip, python-setuptools
 * install yay to have access to AUR
-* color is enabled in pacman.conf
-* noatime is set in fstab to avoid unnecessary writes of relatime
+* color enabled in pacman.conf
+* `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increased allowed failed login attemps to 10 before lock out
 * no sudo password needed for nnn editor
-* some services are installed and enabled
+* services installed and enabled
     * ssh - for remote access
     * plocate - file search locate
     * cronie - cron time scheduler
@@ -70,8 +69,6 @@ or wireguard node, or a web server or whatever else terminal based.
 ### playbook_zsh.yml
 
 ![steeef-theme](https://i.imgur.com/ZAvdYSU.png)
-
-Sets zsh with some sane framework to not feel like neanderthal with bash.
 
 * install zsh shell
 * copy bash history in to .zhistory
