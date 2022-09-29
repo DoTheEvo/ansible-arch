@@ -6,19 +6,18 @@
 
 # Overview
 
+The objective is to have arch linux setup the way one desires
+with the least amount of effort. For this Ansible is used.
+
 Ansible is an automation platform.<br>
 It executes tasks from `playbooks` on machines listed in `inventory`.
-
 Open source, developed by Red Hat.
 Written and dependent on python. Uses YAML configuration files.
 Agent-less, controled machines need just ssh+python (linux) or
 winrm+powershell (windows).<br>
 Praised for simplicity.
 
-Objective here is to clone a repo, execute few commands, wait,
-BAM! Arch is suddenly just like you want it.<br>
-Also to have a dedicated place to write prefered applications,
-services, settings,.. 
+For now this repo aims at just server deployment. Just terminal stuff.
 
 # How to execute
 
