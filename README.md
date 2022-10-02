@@ -60,11 +60,11 @@ useful terminal progams, settings, maintance services,
     * trash-cli - delete to trash
     * paccache - weekly clearing of pacman cache
     * reflector - weekly update of mirrorlist (change country codes)
-* install micro text editor, copy configs,
-  set micro as the default editor in `.bashrc`
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
+* install micro text editor, copy configs,
+  set micro as the default editor in `.bashrc`
 
 ### playbook_zsh.yml
 
