@@ -1,0 +1,62 @@
+# THIS IS COPY OF TOML WITH ADDED [ BRACKETS ] HIGHLIGHT
+# AND ADDED // FOR COMMENTS
+
+filetype: conf
+
+detect:
+    # added match to any file without extension containing "conf"
+    filename: "(\\.(conf)$|\\.(cfg)$|^[^.]*conf[^.]*$)"
+
+rules:
+    # Punctuation
+    - symbol: '[=,\.]'
+    - symbol.brackets: '[{\[\]}]'
+    # Strings
+    - constant.string:
+        start: '"""'
+        end: '\"{3,5}'
+        skip: '\\.'
+        rules:
+            - constant.specialChar: '\\u[[:xdigit:]]{4}'
+            - constant.specialChar: '\\U[[:xdigit:]]{8}'
+            - constant.specialChar: '\\[btnfr"\\]'
+    - constant.string:
+        start: '"'
+        end: '"'
+        skip: '\\.'
+        rules:
+            - constant.specialChar: '\\u[[:xdigit:]]{4}'
+            - constant.specialChar: '\\U[[:xdigit:]]{8}'
+            - constant.specialChar: '\\[btnfr"\\]'
+    - constant.string:
+        start: "'''"
+        end: "'{3,5}"
+        rules: []
+    - constant.string:
+        start: "'"
+        end: "'"
+        rules: []
+    # Integer
+    - constant.number: '[+-]?(\d+_)*\d+\b'
+    - constant.number: '(0x([[:xdigit:]]+_)*[[:xdigit:]]+|0o([0-7]_)*[0-7]+|0b([01]+_)*[01]+)'
+    # Float
+    - constant.number: '[+-]?(\d+_)*\d+\.(\d+_)*\d+'
+    - constant.number: '[+-]?(\d+_)*\d+(\.(\d+_)*\d+)?[Ee][+-]?(\d+_)*\d+'
+    - constant.number: '(\+|-)(inf|nan)'
+    # Bare key, keys starting with a digit or dash are ambiguous with numbers and are skipped
+    - identifier: '\b[A-Za-z_][A-Za-z0-9_-]*\b'
+    # Boolean and inf, nan without sign
+    - constant.bool.true: '\btrue\b'
+    - constant.bool.false: '\bfalse\b'
+    - constant.number: '\b(inf|nan)\b'
+    # Date and Time
+    - constant: '\d+-\d{2}-\d{2}([T ]\d{2}:\d{2}:\d{2}(\.\d+)?([+-]\d{2}:\d{2}|Z)?)?'
+    - constant: '\d{2}:\d{2}:\d{2}(\.\d+)?'
+    # Brackets detection from git-config.yml
+    - special: "^[[:space:]]*\\[.*\\]$"
+    # Comments
+    - comment:
+        start: "#|//"
+        end: "$"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"

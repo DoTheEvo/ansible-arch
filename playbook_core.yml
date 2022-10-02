@@ -24,16 +24,19 @@
           - curl
           - wget
           - rsync
-          - bat
           - nnn
+          - bat
+          - tree
           - unarchiver
           - duf
           - ncdu
           - htop
           - iotop
           - glances
+          - nmap
           - iproute2
           - bind
+          - nload
           - borg
           - fuse
           - python-llfuse

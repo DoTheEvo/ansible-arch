@@ -6,8 +6,9 @@
 
 # Overview
 
-The objective is to have arch linux setup the way one desires
-with the least amount of effort. For this Ansible is used.
+The objective is to have an easy way to have fresh arch instalation setup
+the way one desires. Reliably and with the least amount of effort.
+For this Ansible is used.
 
 Ansible is an automation platform.<br>
 It executes tasks from `playbooks` on machines listed in `inventory`.
@@ -17,21 +18,21 @@ Agent-less, controled machines need just ssh+python (linux) or
 winrm+powershell (windows).<br>
 Praised for simplicity.
 
-For now this repo aims at just server deployment. Just terminal stuff.
+For now this repo aims at just server deployment of arch.
+Terminal stuff, no xorg.
 
 # How to execute
 
 install arch linux, log in to a non root account that can sudo
 
-* install ansible and git - `sudo pacman -S ansible git`
-* clone this repo - `git clone https://github.com/DoTheEvo/ansible-arch.git`
-* enter the directory - `cd ansible`
+* `sudo pacman -S ansible git` - install ansible and git
+* `git clone https://github.com/DoTheEvo/ansible-arch.git` - clone this repo
+* `cd ansible` - enter the directory
 * run the playbooks you want
     * `ansible-playbook -u $USER -K playbook_core.yml`
     * `ansible-playbook -u $USER -K playbook_zsh.yml`
     * `ansible-playbook -u $USER -K playbook_docker.yml`
 
-*extra info:*<br>
 yes, you write `$USER` there, which puts in the user you are logged in <br>
 the `-K` is short for `--ask-become-pass` which will prompt for password
 
@@ -42,23 +43,23 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 useful terminal progams, settings, maintance services, 
 
 * arch upgrade, equivalent of `pacman -Syu`
-* install this:<br>
-  nano, micro, git, curl, wget, rsync, bat, nnn, unarchiver, duf, ncdu, htop,
-  iotop, glances, iproute2, bind, borg, fuse,
-  python-llfuse, python-pip, python-setuptools
+* install:<br>
+  nano, micro, git, curl, wget, rsync, nnn, bat, tree, unarchiver, duf, ncdu,
+  htop, iotop, glances, nmap, iproute2, bind, borg, fuse,
+  python-llfuse, python-pip, python-setuptools, python-pexpect, 
 * install yay to have access to AUR
 * color enabled in pacman.conf
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increased allowed failed login attemps to 10 before lock out
 * no sudo password needed for nnn editor
 * services installed and enabled
-    * ssh - for remote access
+    * ssh - remote access
     * plocate - file search locate
     * cronie - cron time scheduler
-    * fstrim - for weekly ssd trim
+    * fstrim - weekly ssd trim
     * trash-cli - delete to trash
-    * paccache - for weekly clearing of pacman cache
-    * reflector - for weekly update of mirrorlist (change country codes)
+    * paccache - weekly clearing of pacman cache
+    * reflector - weekly update of mirrorlist (change country codes)
 * install micro text editor, copy configs,
   set micro as the default editor in `.bashrc`
 * install neofetch
