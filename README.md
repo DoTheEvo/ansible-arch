@@ -27,7 +27,7 @@ install arch linux, log in to a non root account that can sudo
 
 * `sudo pacman -S ansible git` - install ansible and git
 * `git clone https://github.com/DoTheEvo/ansible-arch.git` - clone this repo
-* `cd ansible` - enter the directory
+* `cd ansible-arch` - enter the directory
 * run the playbooks you want
     * `ansible-playbook -u $USER -K playbook_core.yml`
     * `ansible-playbook -u $USER -K playbook_zsh.yml`

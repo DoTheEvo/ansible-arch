@@ -1,0 +1,14 @@
+---
+- name: test
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: copy dir
+      become: no
+      copy:
+        src: '.config/micro/'
+        dest: '~/.config/micro'
+        mode: 0644
+
+

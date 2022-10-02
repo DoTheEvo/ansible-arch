@@ -234,31 +234,6 @@
         enabled: yes
         state: started
 
-# SETUP MICRO TEXT EDITOR  ---------------------------------------------------
-
-    - name: install micro text editor
-      pacman:
-        name:
-          - micro
-
-    - name: copy bindings.json and settings.json
-      become: no
-      copy:
-        src: '{{item}}'
-        dest: '~/.config/micro/'
-        mode: 0644
-      loop:
-        - ./.config/micro/bindings.json
-        - ./.config/micro/settings.json
-
-    - name: set default editor in .bashrc
-      become: no
-      blockinfile:
-        path: ~/.bashrc
-        block: |
-          export EDITOR=micro
-          export VISUAL=micro
-
 # NEOFETCH  ------------------------------------------------------------------
 
     - name: install neofetch
@@ -349,5 +324,27 @@
       with_items:
           - vboxservice.service
       when: virtualization_type.stdout == 'oracle'
+
+# SETUP MICRO TEXT EDITOR  ---------------------------------------------------
+
+    - name: install micro text editor
+      pacman:
+        name:
+          - micro
+
+    - name: copy config directory with prefernces, hotkeys, syntax highlight
+      become: no
+      copy:
+        src: .config/micro
+        dest: ~/.config
+        mode: 0644
+
+    - name: set default editor in .bashrc
+      become: no
+      blockinfile:
+        path: ~/.bashrc
+        block: |
+          export EDITOR=micro
+          export VISUAL=micro
 
 #  ---------------------------------------------------------------------------
