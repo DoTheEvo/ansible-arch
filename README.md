@@ -122,7 +122,7 @@ bunch of commands
 
 encountered issues
 
-* **in vmware issue with an error in journal**
+* **in vmware issue with an error in journal**<br>
   issue - piix4_smbus SMBus Host Controller not enabled<br>
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`<br>
   check - `lsmod | grep i2c`
