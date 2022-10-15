@@ -38,9 +38,9 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 # Playbooks
 
-### playbook_core.yml
+[executing_playbook.webm](https://user-images.githubusercontent.com/1690300/196008623-278f5928-bb4d-4931-af5c-0acb03f4ab7f.webm)
 
-[vid_1665844195.webm](https://user-images.githubusercontent.com/1690300/195992764-c73c8742-0474-46a0-96e7-58ae21e85463.webm)
+### playbook_core.yml
 
 useful terminal progams, settings, maintance services 
 
