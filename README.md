@@ -50,7 +50,8 @@ useful terminal progams, settings, maintance services
   htop, iotop, glances, nmap, gnu-netcat, iproute2, bind, nload, borg,
   fuse, python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
-* color enabled in pacman.conf
+* in pacman.conf enable color and enable parallel downloads
+* in makepkg.conf disable compression and enable parallel compilation
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increased allowed failed login attemps to 10 before lock out
 * enable members of wheel group to sudo

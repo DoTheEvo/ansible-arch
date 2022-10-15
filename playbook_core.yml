@@ -95,7 +95,7 @@
         regexp: "PKGEXT='.pkg.tar.zst'"
         line: "PKGEXT='.pkg.tar'"
 
-    - name: makepkg - enable parallel compilation
+    - name: makepkg - enable parallel compilation MAKEFLAGS="-j$(nproc)"
       lineinfile:
         path: /etc/makepkg.conf
         regexp: '#MAKEFLAGS="-j2"'
