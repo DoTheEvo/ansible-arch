@@ -34,6 +34,7 @@
           - iotop
           - glances
           - nmap
+          - gnu-netcat
           - iproute2
           - bind
           - nload

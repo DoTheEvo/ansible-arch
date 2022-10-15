@@ -40,6 +40,9 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 ### playbook_core.yml
 
+![steeef-theme](https://i.imgur.com/ScCklkj.mp4)
+
+
 useful terminal progams, settings, maintance services, 
 
 * arch upgrade, equivalent of `pacman -Syu`
@@ -59,7 +62,7 @@ useful terminal progams, settings, maintance services,
     * fstrim - weekly ssd trim
     * trash-cli - delete to trash
     * paccache - weekly clearing of pacman cache
-    * reflector - weekly update of mirrorlist (change country codes)
+    * reflector - weekly update of mirrorlist (change to your country codes)
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
