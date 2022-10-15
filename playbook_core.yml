@@ -95,6 +95,12 @@
         regexp: "PKGEXT='.pkg.tar.zst'"
         line: "PKGEXT='.pkg.tar'"
 
+    - name: makepkg - enable parallel compilation
+      lineinfile:
+        path: /etc/makepkg.conf
+        regexp: '#MAKEFLAGS="-j2"'
+        line: 'MAKEFLAGS="-j$(nproc)"'
+
     - name: fstab change relatime to noatime
       replace:
         path: /etc/fstab
