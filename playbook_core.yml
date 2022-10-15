@@ -105,7 +105,7 @@
 
     - name: disable need for sudo password for nnn
       lineinfile:
-        path: /etc/sudoers.d/02_no-pswd-nnn
+        path: /etc/sudoers.d/02_no_pswd_nnn
         state: present
         line: "ALL ALL=NOPASSWD:SETENV: /usr/bin/nnn"
         validate: /usr/sbin/visudo -cf %s
