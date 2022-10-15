@@ -113,11 +113,16 @@ bunch of commands
 * `rsync -ah --info=progress2`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
 * `ss -tulpn` - shows what uses which port
-* `sudo nc -l -p 6112` -> enable port forwarding on router -> test on https://www.grc.com/x/portprobe=6112
+* `sudo nc -vv -l -p 8789` - netcat starts tiny server listening at port 8789,<br>
+   do port forwarding on router/firewall, then test on
+   [https://www.grc.com/x/portprobe=8789](https://www.grc.com/x/portprobe=8789)
+* `sudo nc -vv -u -l -p 8789` netcat server now in udp mode<br>
+  can be tested with another netcat instance running `nc <ip> 8789`<br>
+  writing something and pressing enter shows the text on the server
 
 encountered issues
 
-* **vmware issue with error being present in the log**
+* **in vmware issue with an error in journal**
   issue - piix4_smbus SMBus Host Controller not enabled<br>
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`<br>
   check - `lsmod | grep i2c`
