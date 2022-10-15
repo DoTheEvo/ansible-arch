@@ -65,7 +65,7 @@ useful terminal progams, settings, maintance services,
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
-* install micro text editor, copy configs,
+* install micro text editor, copy config, keybinds, syntax highlight
   set micro as the default editor in `.bashrc`
 
 ### playbook_zsh.yml

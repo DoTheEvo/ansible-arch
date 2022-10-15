@@ -95,6 +95,14 @@
         regexp: '^# deny = 3$'
         line: 'deny = 10'
 
+    - name: enable members of wheel group to sudo
+      lineinfile:
+        path: /etc/sudoers.d/wheel-allow-sudo
+        state: present
+        line: "%wheel ALL=(ALL:ALL) ALL"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+
     - name: disable need for sudo password for nnn
       lineinfile:
         path: /etc/sudoers.d/no-pswd-nnn
