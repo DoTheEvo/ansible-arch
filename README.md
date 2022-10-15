@@ -40,9 +40,6 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 ### playbook_core.yml
 
-![steeef-theme](https://i.imgur.com/ScCklkj.mp4)
-
-
 useful terminal progams, settings, maintance services, 
 
 * arch upgrade, equivalent of `pacman -Syu`
