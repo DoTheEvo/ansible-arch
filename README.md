@@ -47,8 +47,8 @@ useful terminal progams, settings, maintance services
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
   nano, micro, git, curl, wget, rsync, nnn, bat, tree, unarchiver, duf, ncdu,
-  htop, iotop, glances, nmap, gnu-netcat, iproute2, bind, nload, borg,
-  fuse, python-llfuse, python-pip, python-setuptools, python-pexpect
+  htop, iotop, glances, nmap, gnu-netcat, iproute2, bind, nload, sysfsutils,
+  borg, fuse, python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
 * in pacman.conf enable color and enable parallel downloads
 * in makepkg.conf disable compression and enable parallel compilation
