@@ -102,9 +102,10 @@ with IPs of machines you want to *change*.
 
 bunch of commands
 
-* `systemctl list-units --type=service --state=active`
-* `systemctl list-units --type=timer --state=active`
-* `journalctl -b -r`
+* `sudo systemctl --failed`
+* `sudo journalctl -b -r`
+* `sudo systemctl list-units --type=service --state=active`
+* `sudo systemctl list-units --type=timer --state=active`
 * `lspci -k`
 * `ss -tulpn` - shows what uses which port
 * `rsync -ah --info=progress2`
