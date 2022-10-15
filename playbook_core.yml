@@ -77,11 +77,23 @@
 
 # SYSTEM SETTINGS CHANGES ----------------------------------------------------
 
-    - name: enable color in pacman.conf
+    - name: pacman - enable color
       lineinfile:
         path: /etc/pacman.conf
         regexp: '^#Color$'
         line: 'Color'
+
+    - name: pacman - enable ParallelDownloads = 5
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#ParallelDownloads = 5'
+        line: 'ParallelDownloads = 5'
+
+    - name: makepkg - disable compression
+      lineinfile:
+        path: /etc/makepkg.conf
+        regexp: "PKGEXT='.pkg.tar.zst'"
+        line: "PKGEXT='.pkg.tar'"
 
     - name: fstab change relatime to noatime
       replace:
