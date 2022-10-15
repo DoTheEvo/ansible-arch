@@ -124,7 +124,7 @@
         enabled: yes
         state: started
 
-# LOCATE THE QUICK FILE SEARCH------------------------------------------------
+# LOCATE THE QUICK FILE SEARCH  ----------------------------------------------
 
     - name: install plocate
       pacman:
@@ -227,7 +227,7 @@
         content: |
           --save /etc/pacman.d/mirrorlist
           --protocol http
-          --country SK,CZ,UA
+          --country SK,CZ
           --score 20
           --sort rate
 

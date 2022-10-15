@@ -42,17 +42,18 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 [vid_1665844195.webm](https://user-images.githubusercontent.com/1690300/195992764-c73c8742-0474-46a0-96e7-58ae21e85463.webm)
 
-useful terminal progams, settings, maintance services, 
+useful terminal progams, settings, maintance services 
 
-* arch upgrade, equivalent of `pacman -Syu`
+* arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
   nano, micro, git, curl, wget, rsync, nnn, bat, tree, unarchiver, duf, ncdu,
-  htop, iotop, glances, nmap, iproute2, bind, borg, fuse,
-  python-llfuse, python-pip, python-setuptools, python-pexpect, 
+  htop, iotop, glances, nmap, gnu-netcat, iproute2, bind, nload, borg,
+  fuse, python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
 * color enabled in pacman.conf
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increased allowed failed login attemps to 10 before lock out
+* enable members of wheel group to sudo
 * no sudo password needed for nnn editor
 * services installed and enabled
     * ssh - remote access
@@ -61,7 +62,7 @@ useful terminal progams, settings, maintance services,
     * fstrim - weekly ssd trim
     * trash-cli - delete to trash
     * paccache - weekly clearing of pacman cache
-    * reflector - weekly update of mirrorlist (change to your country codes)
+    * reflector - weekly update of mirrorlist - !!change the country codes!!
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
@@ -82,10 +83,9 @@ useful terminal progams, settings, maintance services,
 
 ### playbook_docker.yml
 
-* install docker, docker-compose and ctop
+* install docker, docker-compose, ctop
 * enable and start docker service
 * add the current user to the docker group to avoid need for sudo
-
 
 ### Local deployment
 
@@ -94,18 +94,19 @@ Meaning the machine is *changing* itself,
 as oppose to more typical ansible use, where you run playbooks on one machine
 to *change* 143 virtual machines somewhere on the cloud.
 
-To go from local to remote, edit inventory and remove local entries
-and add IP of machines you want to *change*.
+To go from local to remote, edit inventory, replace local entries
+with IPs of machines you want to *change*.
 
 # Useful
 
+bunch of commands
+
 * `systemctl list-units --type=service --state=active`
 * `systemctl list-units --type=timer --state=active`
-* `ss -tulpn`
-   show what uses which port
+* `journalctl -b -r`
+* `lspci -k`
+* `ss -tulpn` - shows what uses which port
 * `rsync -ah --info=progress2`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
-* `lspci -k`
-* `journalctl -b -r`
 * `cat /proc/cmdline`
-* `sudo nc -l -p 6112` -> port forwarding on router -> https://www.grc.com/x/portprobe=6112
+* `sudo nc -l -p 6112` -> enable port forwarding on router -> test on https://www.grc.com/x/portprobe=6112

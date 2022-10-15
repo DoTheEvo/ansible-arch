@@ -11,10 +11,13 @@
           - zsh
           - curl
 
-    - name: write current bash history in to the file .bash_history
-      shell: history -a
-      args:
-        executable: /usr/bin/bash
+    # ITS NOT WORKING THE WRITTEN HISTORY IS PROBABLY DIFFERENT SESSION
+    # AND DUNNO HOW TO TARGET THAT SESSION
+    #
+    # - name: write current active bash history in to the file .bash_history
+    #   shell: history -a
+    #   args:
+    #     executable: /usr/bin/bash
 
     - name: add content from .bash_history to .zhistory
       shell: strings -eS ~/.bash_history >> ~/.zhistory
