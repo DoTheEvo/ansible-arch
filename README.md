@@ -40,6 +40,8 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 ### playbook_core.yml
 
+[vid_1665844195.webm](https://user-images.githubusercontent.com/1690300/195992764-c73c8742-0474-46a0-96e7-58ae21e85463.webm)
+
 useful terminal progams, settings, maintance services, 
 
 * arch upgrade, equivalent of `pacman -Syu`
