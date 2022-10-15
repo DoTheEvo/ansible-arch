@@ -102,13 +102,22 @@ with IPs of machines you want to *change*.
 
 bunch of commands
 
-* `sudo systemctl --failed`
+* `sudo journalctl -p 3 -xb`
 * `sudo journalctl -b -r`
+* `sudo systemctl --failed`
 * `sudo systemctl list-units --type=service --state=active`
 * `sudo systemctl list-units --type=timer --state=active`
+* `cat /proc/cmdline`
+* `lsmod`
 * `lspci -k`
-* `ss -tulpn` - shows what uses which port
 * `rsync -ah --info=progress2`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
-* `cat /proc/cmdline`
+* `ss -tulpn` - shows what uses which port
 * `sudo nc -l -p 6112` -> enable port forwarding on router -> test on https://www.grc.com/x/portprobe=6112
+
+encountered issues
+
+* **vmware issue with error being present in the log**
+  issue - piix4_smbus SMBus Host Controller not enabled<br>
+  solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`<br>
+  check - `lsmod | grep i2c`

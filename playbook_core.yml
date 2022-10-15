@@ -38,6 +38,7 @@
           - iproute2
           - bind
           - nload
+          - sysfsutils
           - borg
           - fuse
           - python-llfuse
