@@ -43,7 +43,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 [executing_playbook.webm](https://user-images.githubusercontent.com/1690300/196008623-278f5928-bb4d-4931-af5c-0acb03f4ab7f.webm)
 
-### playbook_core.yml
+### [playbook_core.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_core.yml)
 
 useful terminal progams, settings, maintance services 
 
@@ -73,7 +73,7 @@ useful terminal progams, settings, maintance services
 * install micro text editor, copy config, keybinds, syntax highlight
   set micro as the default editor in `.bashrc`
 
-### playbook_zsh.yml
+### [playbook_zsh.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_zsh.yml)
 
 ![steeef-theme](https://i.imgur.com/ZAvdYSU.png)
 
@@ -85,7 +85,7 @@ useful terminal progams, settings, maintance services
 * copy .myownrc with various predefined stuff
 * source `.myownrc` in `.zshrc`
 
-### playbook_docker.yml
+### [playbook_docker.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_docker.yml)
 
 * install docker, docker-compose, ctop
 * enable and start docker service
