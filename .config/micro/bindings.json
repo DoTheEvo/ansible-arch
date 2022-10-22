@@ -1,3 +1,6 @@
 {
-    "Ctrl-d": "SpawnMultiCursor"
+    "Ctrl-d": "SpawnMultiCursor",
+    "CtrlShiftUp": "MoveLinesUp",
+    "CtrlShiftDown": "MoveLinesDown",
+    "ShiftDelete": "DeleteLine"
 }
