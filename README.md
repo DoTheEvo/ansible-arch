@@ -103,7 +103,7 @@ with IPs of machines you want to *change*.
 
 # Useful
 
-bunch of commands
+bunch of linux commands
 
 * `sudo journalctl -p 3 -xb`
 * `sudo journalctl -b -r`
@@ -123,7 +123,7 @@ bunch of commands
   can be tested with another netcat instance running `nc <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
 
-encountered issues
+encountered issues when running arch linux server
 
 * **in vmware issue with an error in journal** - piix4_smbus SMBus
   Host Controller not enabled<br>
