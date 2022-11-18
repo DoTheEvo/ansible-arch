@@ -19,10 +19,16 @@
     #   args:
     #     executable: /usr/bin/bash
 
+    - name: "Check if .bash_history exists"
+      stat:
+        path: "~/.bash_history"
+      register: stat_chech_result
+
     - name: add content from .bash_history to .zhistory
       shell: strings -eS ~/.bash_history >> ~/.zhistory
       args:
         executable: /usr/bin/bash
+      when: stat_chech_result.stat.exists
 
     - name: change shell
       become: yes

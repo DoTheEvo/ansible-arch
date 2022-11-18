@@ -4,7 +4,7 @@
   become: yes
 
   tasks:
-    - name: install docer and docker compose and ctop
+    - name: install docker and docker compose and ctop
       pacman:
         update_cache: yes
         name:
