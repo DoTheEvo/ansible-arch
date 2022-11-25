@@ -1,3 +1,4 @@
 {
-    "clipboard": "terminal"
+    "clipboard": "terminal",
+    "tabstospaces": true
 }

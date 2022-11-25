@@ -110,10 +110,12 @@ bunch of linux commands
 * `sudo systemctl --failed`
 * `sudo systemctl list-units --type=service --state=active`
 * `sudo systemctl list-units --type=timer --state=active`
+* `sudo systemctl list-timers`
+* `sudo journalctl -u borg.timer`
 * `cat /proc/cmdline`
 * `lsmod`
 * `lspci -k`
-* `rsync -ah --info=progress2`
+* `rsync -ah --info=progress2 ./minecraft /mnt/bigdisk/backup`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
 * `ss -tulpn` - shows what uses which port
 * `sudo nc -vv -l -p 8789` - netcat starts tiny server listening at port 8789,<br>
