@@ -56,10 +56,10 @@ useful terminal progams, settings, maintance services
 * in pacman.conf enable color and enable parallel downloads
 * in makepkg.conf disable compression and enable parallel compilation
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
-* increased allowed failed login attemps to 10 before lock out
+* increase allowed failed login attemps to 10 before lock out
 * enable members of wheel group to sudo
 * no sudo password needed for nnn editor
-* services installed and enabled
+* services to install and enable
     * ssh - remote access
     * plocate - file search locate
     * cronie - cron time scheduler
@@ -132,3 +132,6 @@ encountered issues when running arch linux server
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`,
   reboot<br>
   check - `sudo journalctl -p 3 -xb` and `lsmod | grep i2c`
+* if going for a long time without update - `sudo pacman -Sy archlinux-keyring`
+  before updating everything
+* to update zim zsh framework- `zimfw update`
