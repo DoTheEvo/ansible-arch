@@ -132,6 +132,6 @@ encountered issues when running arch linux server
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`,
   reboot<br>
   check - `sudo journalctl -p 3 -xb` and `lsmod | grep i2c`
-* if going for a long time without update - `sudo pacman -Sy archlinux-keyring`
+* if **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
   before updating everything
-* to update zim zsh framework- `zimfw update`
+* to **update zim** zsh framework- `zimfw update`
