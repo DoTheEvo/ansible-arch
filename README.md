@@ -103,6 +103,10 @@ with IPs of machines you want to *change*.
 
 # Useful
 
+links
+
+* [virtualization_type detection script](https://github.com/ansible/ansible/blob/devel/lib/ansible/module_utils/facts/virtual/linux.py)
+
 bunch of linux commands
 
 * `sudo journalctl -p 3 -xb`
@@ -125,7 +129,7 @@ bunch of linux commands
   can be tested with another netcat instance running `nc <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
 
-encountered issues when running arch linux server
+# Encountered issues
 
 * **in vmware issue with an error in journal** - piix4_smbus SMBus
   Host Controller not enabled<br>
@@ -135,3 +139,4 @@ encountered issues when running arch linux server
 * if **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
   before updating everything
 * to **update zim** zsh framework- `zimfw update`
+

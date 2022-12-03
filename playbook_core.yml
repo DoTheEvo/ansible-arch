@@ -289,15 +289,13 @@
 
 # HYPERV  --------------------------------------------------------------------
 
-    - name: get virtual enviroment info
-      command: /usr/bin/systemd-detect-virt
-      register: virtualization_type
-
     - name: if hyperv, install hyperv package
       pacman:
         name:
           - hyperv
-      when: virtualization_type.stdout == 'microsoft'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'VirtualPC'
 
     - name: if hyperv, enable and start hyperv integration services
       systemd:
@@ -308,19 +306,19 @@
           - hv_fcopy_daemon.service
           - hv_kvp_daemon.service
           - hv_vss_daemon.service
-      when: virtualization_type.stdout == 'microsoft'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'VirtualPC'
 
 # VMWARE  --------------------------------------------------------------------
-
-    - name: get virtual enviroment info
-      command: /usr/bin/systemd-detect-virt
-      register: virtualization_type
 
     - name: if vmware, install open-vm-tools
       pacman:
         name:
           - open-vm-tools
-      when: virtualization_type.stdout == 'vmware'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'VMware'
 
     - name: if vmware, enable and start vmware open tools services
       systemd:
@@ -330,19 +328,19 @@
       with_items:
           - vmtoolsd.service
           - vmware-vmblock-fuse.service
-      when: virtualization_type.stdout == 'vmware'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'VMware'
 
 # VIRTUALBOX  ---------------------------------------------------------------
-
-    - name: get virtual enviroment info
-      command: /usr/bin/systemd-detect-virt
-      register: virtualization_type
 
     - name: if virtualbox, install guest additions NON-X version
       pacman:
         name:
           - virtualbox-guest-utils-nox
-      when: virtualization_type.stdout == 'oracle'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'virtualbox'
 
     - name: if virtualbox, enable and start vboxservice
       systemd:
@@ -351,7 +349,9 @@
         state: started
       with_items:
           - vboxservice.service
-      when: virtualization_type.stdout == 'oracle'
+      when:
+          - virtualization_role == 'guest'
+          - virtualization_type == 'virtualbox'
 
 # SETUP MICRO TEXT EDITOR  ---------------------------------------------------
 
