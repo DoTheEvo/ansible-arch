@@ -294,8 +294,8 @@
         name:
           - hyperv
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'VirtualPC'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'VirtualPC'
 
     - name: if hyperv, enable and start hyperv integration services
       systemd:
@@ -307,8 +307,8 @@
           - hv_kvp_daemon.service
           - hv_vss_daemon.service
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'VirtualPC'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'VirtualPC'
 
 # VMWARE  --------------------------------------------------------------------
 
@@ -317,8 +317,8 @@
         name:
           - open-vm-tools
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'VMware'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'VMware'
 
     - name: if vmware, enable and start vmware open tools services
       systemd:
@@ -329,8 +329,8 @@
           - vmtoolsd.service
           - vmware-vmblock-fuse.service
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'VMware'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'VMware'
 
 # VIRTUALBOX  ---------------------------------------------------------------
 
@@ -339,8 +339,8 @@
         name:
           - virtualbox-guest-utils-nox
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'virtualbox'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'virtualbox'
 
     - name: if virtualbox, enable and start vboxservice
       systemd:
@@ -350,8 +350,8 @@
       with_items:
           - vboxservice.service
       when:
-          - virtualization_role == 'guest'
-          - virtualization_type == 'virtualbox'
+          - ansible_facts['virtualization_role'] == 'guest'
+          - ansible_facts['virtualization_type'] == 'virtualbox'
 
 # SETUP MICRO TEXT EDITOR  ---------------------------------------------------
 
