@@ -49,9 +49,10 @@ useful terminal progams, settings, maintance services
 
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
-  nano, micro, git, curl, wget, rsync, nnn, bat, tree, unarchiver, duf, ncdu,
-  htop, iotop, glances, nmap, gnu-netcat, iproute2, bind, nload, sysfsutils,
-  borg, fuse, python-llfuse, python-pip, python-setuptools, python-pexpect
+  nano, micro, git, curl, wget, rsync, nnn, bat, tree, unarchiver,
+  duf, ncdu, htop, iotop, glances, nmap, gnu-netcat,
+  net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
+  python-llfuse, python-pip, python-setuptools, python-pexpect
 * install yay to have access to AUR
 * in pacman.conf enable color and enable parallel downloads
 * in makepkg.conf disable compression and enable parallel compilation
@@ -128,6 +129,7 @@ bunch of linux commands
 * `sudo nc -vv -u -l -p 8789` netcat server now in udp mode<br>
   can be tested with another netcat instance running `nc <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
+* `pacman -F <path to a file>` - which package owns that file
 
 # Encountered issues
 

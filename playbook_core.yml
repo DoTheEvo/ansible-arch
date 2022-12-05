@@ -35,10 +35,12 @@
           - glances
           - nmap
           - gnu-netcat
+          - net-tools
           - iproute2
           - bind
           - nload
           - sysfsutils
+          - lsof
           - borg
           - fuse
           - python-llfuse
@@ -259,6 +261,25 @@
     - name: do initial run of reflector.service
       systemd:
         name: reflector
+        enabled: yes
+        state: started
+
+# LOGROTATE  -----------------------------------------------------------------
+
+    - name: install logrotate
+      pacman:
+        name:
+          - logrotate
+
+    - name: logrotate - enable compression
+      lineinfile:
+        path: /etc/logrotate.conf
+        regexp: '^#compress$'
+        line: 'compress'
+
+    - name: enable and start daily logs rotation, cleanup
+      systemd:
+        name: logrotate.timer
         enabled: yes
         state: started
 
