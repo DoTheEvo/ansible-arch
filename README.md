@@ -68,6 +68,7 @@ useful terminal progams, settings, maintance services
     * trash-cli - delete to trash
     * paccache - weekly clearing of pacman cache
     * reflector - weekly update of mirrorlist - !!change the country codes!!
+    * logrotate - if need to prevent logs from growing
 * install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
