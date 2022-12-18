@@ -1,7 +1,7 @@
 [target_arch_machines]
 localhost
+# 10.0.19.118
 # archlinuxx
-# 10.0.19.135
 # 192.168.1.50
 
 [all:vars]

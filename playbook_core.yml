@@ -78,6 +78,12 @@
         path: /etc/sudoers.d/temp_allow_no_pswd_pacman
         state: absent
 
+    - name: set yay options to cleanafter package installation
+      become: no
+      shell: yay -Y --answerclean All --removemake --cleanafter --save
+      args:
+        executable: /usr/bin/bash
+
 # SYSTEM SETTINGS CHANGES ----------------------------------------------------
 
     - name: pacman - enable color
