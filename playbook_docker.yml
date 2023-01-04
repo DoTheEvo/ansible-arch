@@ -18,10 +18,20 @@
         enabled: yes
         state: started
 
-    - name: Add the user to docker group
+    - name: add the user to docker group
       user:
         name: "{{ ansible_user }}"
         groups: docker
         append: yes
 
-
+    - name: set default max logs size to 250MB and set logs rotation
+      copy:
+        dest: '/etc/docker/daemon.json'
+        content: |
+          {
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "50m",
+              "max-file": "5"
+            }
+          }

@@ -19,7 +19,7 @@
     #   args:
     #     executable: /usr/bin/bash
 
-    - name: "Check if .bash_history exists"
+    - name: check if .bash_history exists
       stat:
         path: "~/.bash_history"
       register: stat_chech_result

@@ -20,6 +20,7 @@
         name:
           - nano
           - micro
+          - man-db
           - git
           - curl
           - wget
