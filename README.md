@@ -113,13 +113,16 @@ links
 
 bunch of linux commands
 
-* `sudo journalctl -p 3 -xb`
-* `sudo journalctl -b -r`
-* `sudo systemctl --failed`
-* `sudo systemctl list-units --type=service --state=active`
-* `sudo systemctl list-units --type=timer --state=active`
-* `sudo systemctl list-timers`
-* `sudo journalctl -u borg.timer`
+* `journalctl -p 3 -xb`
+* `journalctl -b -r`
+* `systemctl --failed`
+* `systemctl list-units --type=service --state=active`
+* `systemctl list-units --type=timer --state=active`
+* `systemctl list-timers`
+* `journalctl -u borg.timer`
+* `systemctl list-units --type=mount`
+* `systemctl list-units --type=automount`
+* `findmnt`
 * `cat /proc/cmdline`
 * `lsmod`
 * `lspci -k`
