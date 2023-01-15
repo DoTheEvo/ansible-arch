@@ -17,12 +17,13 @@ alias ip='ip --color=auto'
 
 # n runs nnn as root but keeps users environmental variables
 # it also shows hidden files
-alias n='sudo -E nnn -H'
+# also show file/directory owner in status bar of currently shown file
+alias n='sudo -E nnn -H -U'
 
 # enable trash; different colors for tabs; bookmarks
 export NNN_TRASH=1
 export NNN_COLORS='2136'
-export NNN_BMS='e:/etc;u:~;'
+export NNN_BMS='h:~;e:/etc;s:/etc/systemd/system'
 
 # shell opened from nnn using ! hotkey has indication of depth
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"

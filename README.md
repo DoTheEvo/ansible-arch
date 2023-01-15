@@ -119,7 +119,7 @@ bunch of linux commands
 * `systemctl list-units --type=service --state=active`
 * `systemctl list-units --type=timer --state=active`
 * `systemctl list-timers`
-* `journalctl -u borg.timer`
+* `journalctl -r -u borg.timer`
 * `systemctl list-units --type=mount`
 * `systemctl list-units --type=automount`
 * `findmnt`
@@ -129,6 +129,7 @@ bunch of linux commands
 * `rsync -ah --info=progress2 ./minecraft /mnt/bigdisk/backup`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
 * `ss -tulpn` - shows what uses which port
+* `host 10.0.19.2` - hostname lookup
 * `sudo nc -vv -l -p 8789` - netcat starts tiny server listening at port 8789,<br>
    do port forwarding on router/firewall, then test on
    [https://www.grc.com/x/portprobe=8789](https://www.grc.com/x/portprobe=8789)
