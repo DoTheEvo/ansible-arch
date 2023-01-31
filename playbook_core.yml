@@ -180,7 +180,7 @@
 
 # ARCHLINUX-KEYRING WEEKLY UPDATE  -------------------------------------------
 
-    - name: enable and start ~12h updatedb timer
+    - name: archlinux-keyring - enable weekly update
       systemd:
         name: archlinux-keyring-wkd-sync.timer
         enabled: yes

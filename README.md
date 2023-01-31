@@ -65,6 +65,7 @@ useful terminal progams, settings, maintance services
     * ssh - remote access
     * plocate - file search locate
     * cronie - cron time scheduler
+    * keyring auto-update
     * fstrim - weekly ssd trim
     * trash-cli - delete to trash
     * paccache - weekly clearing of pacman cache
