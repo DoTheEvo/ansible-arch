@@ -148,6 +148,8 @@ bunch of linux commands
   reboot<br>
   check - `sudo journalctl -p 3 -xb` and `lsmod | grep i2c`
 * if **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
-  before updating everything
+  before updating everything.<br>
+  Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
+  Its part of the core playbook.
 * to **update zim** zsh framework- `zimfw update`
 
