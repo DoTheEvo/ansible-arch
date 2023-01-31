@@ -138,6 +138,7 @@ bunch of linux commands
   can be tested with another netcat instance running `nc <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
 * `pacman -F <path to a file>` - which package owns that file
+* `grep -i upgraded /var/log/pacman.log | tac | less` - last upgraded packages
 
 # Encountered issues
 
