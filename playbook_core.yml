@@ -178,6 +178,14 @@
         enabled: yes
         state: started
 
+# ARCHLINUX-KEYRING WEEKLY UPDATE  -------------------------------------------
+
+    - name: enable and start ~12h updatedb timer
+      systemd:
+        name: archlinux-keyring-wkd-sync.timer
+        enabled: yes
+        state: started
+
 # SSD TRIM SCHEDULED  --------------------------------------------------------
 
     - name: install util-linux
