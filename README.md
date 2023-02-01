@@ -39,6 +39,12 @@ install arch linux, log in to a non root account that can sudo
 yes, you write `$USER` there, which puts in the user you are logged in <br>
 the `-K` is short for `--ask-become-pass` which will prompt for password
 
+**Removal**<br>
+After running playbooks it be good to remove ansible package
+and bunch of its dependancies. Saves \~400MB and noise on updating.
+
+* `sudo pacman -Rns ansible`
+
 # Playbooks
 
 [executing_playbook.webm](https://user-images.githubusercontent.com/1690300/196008623-278f5928-bb4d-4931-af5c-0acb03f4ab7f.webm)
