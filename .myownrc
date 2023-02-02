@@ -23,7 +23,7 @@ alias n='sudo -E nnn -H -U'
 # enable trash; different colors for tabs; bookmarks
 export NNN_TRASH=1
 export NNN_COLORS='2136'
-export NNN_BMS='h:~;e:/etc;s:/etc/systemd/system;m:/mnt'
+export NNN_BMS='h:~;d:~/docker;e:/etc;s:/etc/systemd/system;m:/mnt'
 
 # shell opened from nnn using ! hotkey has indication of depth
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
