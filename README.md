@@ -58,7 +58,7 @@ useful terminal progams, settings, maintance services
   nano, micro, man-db, git, curl, wget, rsync, nnn, bat, tree, unarchiver,
   duf, ncdu, htop, iotop, glances, nmap, gnu-netcat,
   net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
-  python-llfuse, python-pip, python-setuptools, python-pexpect
+  python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
   remove make dependancies, always clean builds, cleaup after
 * in pacman.conf enable color and enable parallel downloads

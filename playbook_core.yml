@@ -48,6 +48,7 @@
           - python-pip
           - python-setuptools
           - python-pexpect
+          - sqlite
 
 # YAY TO ACCESS AUR REPOSITORY  ----------------------------------------------
 
