@@ -24,6 +24,12 @@
         groups: docker
         append: yes
 
+    - name: Create /etc/docker directory if it does not exist
+      file:
+        path: /etc/docker
+        state: directory
+        mode: '0755'
+
     - name: set default max logs size to 250MB and set logs rotation
       copy:
         dest: '/etc/docker/daemon.json'
