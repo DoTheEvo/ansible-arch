@@ -135,7 +135,7 @@ bunch of linux commands
 * `lspci -k`
 * `rsync -ah --info=progress2 ./minecraft /mnt/bigdisk/backup`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
-* `ss -tulpn` - shows what uses which port
+* `sudo ss -tulpn` - shows what uses which port
 * `host 10.0.19.2` - hostname lookup
 * `sudo nc -vv -l -p 8789` - netcat starts tiny server listening at port 8789,<br>
    do port forwarding on router/firewall, then test on
