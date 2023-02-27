@@ -137,11 +137,12 @@ bunch of linux commands
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
 * `sudo ss -tulpn` - shows what uses which port
 * `host 10.0.19.2` - hostname lookup
+* `curl ipinfo.io` - get current public IP
 * `sudo nc -vv -l -p 8789` - netcat starts tiny server listening at port 8789,<br>
    do port forwarding on router/firewall, then test on
    [https://www.grc.com/x/portprobe=8789](https://www.grc.com/x/portprobe=8789)
 * `sudo nc -vv -u -l -p 8789` netcat server now in udp mode<br>
-  can be tested with another netcat instance running `nc <ip> 8789`<br>
+  can be tested with another netcat instance running `nc -u <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
 * `pacman -F <path to a file>` - which package owns that file
 * `grep -i upgraded /var/log/pacman.log | tac | less` - last upgraded packages
