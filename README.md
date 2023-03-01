@@ -56,7 +56,7 @@ useful terminal progams, settings, maintance services
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
   nano, micro, man-db, git, curl, wget, rsync, nnn, bat, tree, unarchiver,
-  duf, ncdu, htop, iotop, glances, nmap, gnu-netcat,
+  duf, ncdu, htop, iotop, glances, nmap, gnu-netcat, tcpdump,
   net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
@@ -144,6 +144,7 @@ bunch of linux commands
 * `sudo nc -vv -u -l -p 8789` netcat server now in udp mode<br>
   can be tested with another netcat instance running `nc -u <ip> 8789`<br>
   writing something and pressing enter shows the text on the server
+* `sudo tcpdump -n udp port 21116` - see udp traffic on a port
 * `pacman -F <path to a file>` - which package owns that file
 * `grep -i upgraded /var/log/pacman.log | tac | less` - last upgraded packages
 

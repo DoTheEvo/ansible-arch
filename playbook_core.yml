@@ -36,6 +36,7 @@
           - glances
           - nmap
           - gnu-netcat
+          - tcpdump
           - net-tools
           - iproute2
           - bind
