@@ -159,5 +159,5 @@ bunch of linux commands
   before updating everything else with `pacman -Syu`.<br>
   Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
   It's part of the core playbook.
-* To **update zim** zsh framework- `zimfw update`.
+* To **update zim** zsh framework- `zimfw upgrade` and `zimfw update`.
 
