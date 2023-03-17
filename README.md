@@ -60,13 +60,13 @@ useful terminal progams, settings, maintance services
   net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
-  remove make dependancies, always clean builds, cleaup after
+  set - remove make dependencies, always clean builds, cleanup after
 * in pacman.conf enable color and enable parallel downloads
 * in makepkg.conf disable compression and enable parallel compilation
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
-* increase allowed failed login attemps to 10 before lock out
+* increase allowed failed login attempts to 10 before lock out
 * enable members of wheel group to sudo
-* no sudo password needed for nnn editor
+* no sudo password needed for nnn file manager
 * services to install and enable
     * ssh - remote access
     * plocate - file search locate
@@ -150,14 +150,14 @@ bunch of linux commands
 
 # Encountered issues
 
-* **in vmware issue with an error in journal** - piix4_smbus SMBus
+* **In vmware issue with an error in journal** - piix4_smbus SMBus
   Host Controller not enabled<br>
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`,
   reboot<br>
   check - `sudo journalctl -p 3 -xb` and `lsmod | grep i2c`
-* if **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
-  before updating everything.<br>
+* If **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
+  before updating everything else with `pacman -Syu`.<br>
   Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
-  Its part of the core playbook.
-* to **update zim** zsh framework- `zimfw update`
+  It's part of the core playbook.
+* To **update zim** zsh framework- `zimfw update`.
 
