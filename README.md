@@ -41,7 +41,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 **Removal**<br>
 After running playbooks it be good to remove ansible package
-and bunch of its dependancies. Saves \~400MB and noise on updating.
+and bunch of its dependancies. Saves \~400MB and noise during updating.
 
 * `sudo pacman -Rns ansible`
 
@@ -155,6 +155,9 @@ bunch of linux commands
   solution - in `/etc/modprobe.d/blacklist.conf` add `blacklist i2c_piix4`,
   reboot<br>
   check - `sudo journalctl -p 3 -xb` and `lsmod | grep i2c`
+* **Weekly hang-up because swap was off**. Archlinux VM docker host experienced
+  [huge spike of constant disk use](https://i.imgur.com/2NWXpu8.png)
+  which was cause by the lack of SWAP. After adding 6GB swap file it was rock solid.
 * If **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
   before updating everything else with `pacman -Syu`.<br>
   Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
