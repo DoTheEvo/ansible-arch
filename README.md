@@ -135,6 +135,7 @@ bunch of linux commands
 * `lspci -k`
 * `rsync -ah --info=progress2 ./minecraft /mnt/bigdisk/backup`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
+* `sudo nethogs` - relatime traffic per process
 * `sudo ss -tulpn` - shows what uses which port
 * `host 10.0.19.2` - hostname lookup
 * `curl ipinfo.io` - get current public IP
