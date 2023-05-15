@@ -55,8 +55,8 @@ useful terminal progams, settings, maintance services
 
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
-  nano, micro, man-db, git, curl, wget, rsync, nnn, bat, tree, unarchiver,
-  duf, ncdu, htop, iotop, glances, nmap, gnu-netcat, tcpdump,
+  nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
+  unarchiver, duf, ncdu, htop, iotop, glances, nmap, gnu-netcat, tcpdump,
   net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
@@ -66,9 +66,9 @@ useful terminal progams, settings, maintance services
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increase allowed failed login attempts to 10 before lock out
 * enable members of wheel group to sudo
-* no sudo password needed for nnn file manager
 * services to install and enable
     * ssh - remote access
+    * nnn - get plugins, no sudo needed
     * plocate - file search locate
     * cronie - cron time scheduler
     * archlinux-keyring - weekly update
@@ -135,7 +135,7 @@ bunch of linux commands
 * `lspci -k`
 * `rsync -ah --info=progress2 ./minecraft /mnt/bigdisk/backup`
 * `sudo dd bs=4M if=arch.iso of=/dev/sdX status=progress oflag=direct`
-* `sudo nethogs` - relatime traffic per process
+* `sudo nethogs` - realtime traffic per process
 * `sudo ss -tulpn` - shows what uses which port
 * `host 10.0.19.2` - hostname lookup
 * `curl ipinfo.io` - get current public IP

@@ -13,6 +13,11 @@ alias statt='stat -c "%A %a %n" *'
 alias ip='ip --color=auto'
 
 # ----------------------------------------------------------------------------
+# FZF  -----------------------------------------------------------------------
+
+export FZF_DEFAULT_COMMAND='fd --hidden'
+
+# ----------------------------------------------------------------------------
 # NNN FILE MANAGER  ----------------------------------------------------------
 
 # n runs nnn as root but keeps users environmental variables
@@ -24,6 +29,7 @@ alias n='sudo -E nnn -H -U'
 export NNN_TRASH=1
 export NNN_COLORS='2136'
 export NNN_BMS='h:~;d:~/docker;e:/etc;s:/etc/systemd/system;m:/mnt;v:/var'
+export NNN_PLUG='f:fzcd;'
 
 # shell opened from nnn using ! hotkey has indication of depth
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"

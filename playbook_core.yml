@@ -26,6 +26,8 @@
           - wget
           - rsync
           - nnn
+          - fd
+          - fzf
           - bat
           - tree
           - unarchiver
@@ -134,14 +136,6 @@
         validate: /usr/sbin/visudo -cf %s
         create: yes
 
-    - name: disable need for sudo password for nnn
-      lineinfile:
-        path: /etc/sudoers.d/02_no_pswd_nnn
-        state: present
-        line: "ALL ALL=NOPASSWD:SETENV: /usr/bin/nnn"
-        validate: /usr/sbin/visudo -cf %s
-        create: yes
-
 # SSH ------------------------------------------------------------------------
 
     - name: install ssh
@@ -154,6 +148,25 @@
         name: sshd
         enabled: yes
         state: started
+
+# NNN ------------------------------------------------------------------------
+
+    - name: install nnn
+      pacman:
+        name:
+          - nnn
+
+    - name: install nnn plugins
+      become: no
+      shell: "curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh"
+
+    - name: disable need for sudo password for nnn
+      lineinfile:
+        path: /etc/sudoers.d/02_no_pswd_nnn
+        state: present
+        line: "ALL ALL=NOPASSWD:SETENV: /usr/bin/nnn"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
 
 # LOCATE THE QUICK FILE SEARCH  ----------------------------------------------
 
