@@ -104,21 +104,21 @@ useful terminal progams, settings, maintance services
 
 ### [playbook_lts_kernel.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_lts_kernel.yml)
 
-After experiencing [a kernel regression](https://bbs.archlinux.org/viewtopic.php?id=288723),
-I decided that switch to [lts kernel](https://wiki.archlinux.org/title/kernel#Officially_supported_kernels)
-should be the default. Archinstall script on ISO supports the choice of lts kernel
-during installation. This playbook solves it for already running machines.
-
-Be careful, make a snapshot, before doing this one.
-
 * detect bootloader - systemd or grub
 * installs linux-lts package
 * if systemd boot
   - make a copy of the existing config, alter it to lts,
   make it the default
+* uninstall regular linux kernel
 * if grub
    - generate new grub.cfg
-* uninstall regular linux kernel
+
+After experiencing [a kernel regression](https://bbs.archlinux.org/viewtopic.php?id=288723),
+it became apparent that switch to [lts kernel](https://www.kernel.org/category/releases.html)
+should be the default. Archinstall script on ISO supports the choice of lts kernel
+during installation. This playbook solves it for already running machines.
+
+Be careful.
 
 ### Local deployment
 
