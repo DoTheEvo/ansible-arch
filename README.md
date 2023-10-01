@@ -6,7 +6,7 @@
 
 # Overview
 
-The objective is to have an easy way to have fresh arch instalation setup
+The objective is to have an easy way to have fresh arch installation setup
 the way one desires. Reliably and with the least amount of effort.
 For this Ansible is used.
 
@@ -14,16 +14,16 @@ Ansible is an automation platform.<br>
 It executes tasks from `playbooks` on machines listed in `inventory`.
 Open source, developed by Red Hat.
 Written and dependent on python. Uses YAML configuration files.
-Agent-less, controled machines need just ssh+python (linux) or
+Agent-less, controlled machines need just ssh+python (linux) or
 winrm+powershell (windows).<br>
 Praised for simplicity.
 
-For now this repo aims at just server deployment of arch.
-Terminal stuff, no xorg.
+This repo aims to be easily customizable, playbooks being as simple as possible.
+One should be able to look at them, see how stuff is done and make own changes.
 
 # How to execute
 
-install arch linux, log in to a non root account that can sudo
+install arch linux ([archinstall](https://github.com/archlinux/archinstall)), log in to a non root account that can sudo
 
 * install ansible and git<br>
   `sudo pacman -S ansible git`
@@ -34,6 +34,7 @@ install arch linux, log in to a non root account that can sudo
 * run the playbooks you want
     * `ansible-playbook -u $USER -K playbook_core.yml`
     * `ansible-playbook -u $USER -K playbook_zsh.yml`
+    * `ansible-playbook -u $USER -K playbook_lts_kernel.yml`
     * `ansible-playbook -u $USER -K playbook_docker.yml`
 
 yes, you write `$USER` there, which puts in the user you are logged in <br>
@@ -41,7 +42,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 **Removal**<br>
 After running playbooks it be good to remove ansible package
-and bunch of its dependancies. Saves \~400MB and noise during updating.
+and bunch of its dependencies. Saves \~500MB and noise during updates.
 
 * `sudo pacman -Rns ansible`
 
@@ -51,7 +52,7 @@ and bunch of its dependancies. Saves \~400MB and noise during updating.
 
 ### [playbook_core.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_core.yml)
 
-useful terminal progams, settings, maintance services 
+useful terminal programs, settings, maintenance services 
 
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
