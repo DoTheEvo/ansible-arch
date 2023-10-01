@@ -1,0 +1,157 @@
+---
+- name: playbook_lts_kernel.yml - switch to more stable kernel
+  hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    grub_detected: false
+    systemd_boot_detected: false
+
+  tasks:
+
+# ----------------------------------------------------------------------------
+# ----------------------  DETECTION  ---------------------------------------
+# ----------------------------------------------------------------------------
+
+# SYSTEMD-BOOT DETECTION  ----------------------------------------------------
+
+    - name: systemd-boot detection
+      shell: bootctl is-installed
+      ignore_errors: yes
+      args:
+        executable: /usr/bin/bash
+      register: output_bootctl_is_inst
+
+    - name: set systemd_boot_detected to true if detected
+      set_fact:
+          systemd_boot_detected: true
+      when: output_bootctl_is_inst.stdout == 'yes'
+
+# GRUB DETECTION  ------------------------------------------------------------
+
+    - name: grub detection
+      stat:
+        path: "/boot/grub/grub.cfg"
+      register: output_grub_cfg_check
+
+    - name: set grub_detected to true if detected
+      set_fact:
+          grub_detected: true
+      when: output_grub_cfg_check.stat.exists
+
+# DETECTION RESULTS AND EARLY TERMINATION OF THE PLAYBOOK --------------------
+
+    - debug: msg="systemd_boot_detected - {{ systemd_boot_detected }}"
+    - debug: msg="grub_detected - {{ grub_detected }}"
+
+    - name: end the playbook if both grub and systemd-boot are detected
+      meta: end_host
+      when:
+      - systemd_boot_detected == true
+      - grub_detected == true
+
+    - name: end the playbook if neither grub nor systemd-boot are detected
+      meta: end_host
+      when:
+      - systemd_boot_detected == false
+      - grub_detected == false
+
+# ----------------------------------------------------------------------------
+# ----------------------  INSTALL  -----------------------------------------
+# ----------------------------------------------------------------------------
+
+    - name: install linux-lts
+      pacman:
+        update_cache: yes
+        name:
+          - linux-lts
+      when:
+          - systemd_boot_detected == true or grub_detected == true
+
+# ----------------------------------------------------------------------------
+# ----------------------  SYSTEMD-BOOT  ------------------------------------
+# ----------------------------------------------------------------------------
+
+    - name: get the path of the current default systemd-boot config file
+      shell: "bootctl list | grep -m1 source | awk '{print $2}'"
+      args:
+        executable: /usr/bin/bash
+      register: output_bootctl
+      when: systemd_boot_detected == true
+
+    - name: make a copy of the current default config file
+      copy:
+        src: "{{ output_bootctl.stdout }}"
+        dest: /boot/loader/entries/arch_lts.conf
+        remote_src: yes
+        mode: '0644'
+      when: systemd_boot_detected == true
+
+    - name: change the copied config to point at lts stuff
+      lineinfile:
+        path: /boot/loader/entries/arch_lts.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^title.+$', line: 'title   Arch Linux (linux-lts)' }
+        - { regexp: '^title.+$', line: 'title   Arch Linux (linux-lts)' }
+        - { regexp: '^linux.+$', line: 'linux   /vmlinuz-linux-lts' }
+        - { regexp: '^initrd.+$', line: 'initrd  /initramfs-linux-lts.img' }
+      when: systemd_boot_detected == true
+
+    - name: add sort-key to the config to move the lts boot menu entry to the top
+      lineinfile:
+        path: /boot/loader/entries/arch_lts.conf
+        line: 'sort-key arch'
+      when: systemd_boot_detected == true
+
+    - name: set the lts config as default
+      lineinfile:
+        path: /boot/loader/loader.conf
+        line: 'default arch_lts.conf'
+      when: systemd_boot_detected == true
+
+    - name: make a copy of the arch_lts to create fallback initramfs version
+      copy:
+        src: /boot/loader/entries/arch_lts.conf
+        dest: /boot/loader/entries/arch_lts_fallback.conf
+        remote_src: yes
+        mode: '0644'
+      when: systemd_boot_detected == true
+
+    - name: change in the fallback config initramfs path
+      lineinfile:
+        path: /boot/loader/entries/arch_lts_fallback.conf
+        regexp: '^initrd.+$'
+        line: 'initrd  /initramfs-linux-lts-fallback.img'
+      when: systemd_boot_detected == true
+
+    - name: remove sort-key from the fallback config, to prevent fallback being top in boot menu
+      lineinfile:
+        path: /boot/loader/entries/arch_lts_fallback.conf
+        line: 'sort-key arch'
+        state: absent
+      when: systemd_boot_detected == true
+
+# ----------------------------------------------------------------------------
+# ----------------------  UNINSTALL REGULAR KERNEL  ------------------------
+# ----------------------------------------------------------------------------
+
+    - name: unisntall regular linux kernel
+      pacman:
+        name:
+          - linux
+        state: absent
+      when:
+          - systemd_boot_detected == true or grub_detected == true
+
+# ----------------------------------------------------------------------------
+# ----------------------  GRUB  --------------------------------------------
+# ----------------------------------------------------------------------------
+
+    - name: execute "grub-mkconfig -o /boot/grub/grub.cfg"
+      shell: grub-mkconfig -o /boot/grub/grub.cfg
+      args:
+        executable: /usr/bin/bash
+      when: grub_detected == true
+

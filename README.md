@@ -102,6 +102,24 @@ useful terminal progams, settings, maintance services
 * add the current user to the docker group to avoid need for sudo
 * set default max logs size to 250MB and set logs rotation
 
+### [playbook_lts_kernel.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_lts_kernel.yml)
+
+After experiencing [a kernel regression](https://bbs.archlinux.org/viewtopic.php?id=288723),
+I decided that switch to [lts kernel](https://wiki.archlinux.org/title/kernel#Officially_supported_kernels)
+should be the default. Archinstall script on ISO supports the choice of lts kernel
+during installation. This playbook solves it for already running machines.
+
+Be careful, make a snapshot, before doing this one.
+
+* detect bootloader - systemd or grub
+* installs linux-lts package
+* if systemd boot
+  - make a copy of the existing config, alter it to lts,
+  make it the default
+* if grub
+   - generate new grub.cfg
+* uninstall regular linux kernel
+
 ### Local deployment
 
 This is for a local deployment.
@@ -120,13 +138,14 @@ links
 
 bunch of linux commands
 
-* `journalctl -p 3 -xb`
-* `journalctl -b -r`
+* `journalctl -p 3 -rb`
+* `journalctl -p 3 -rxb`
+* `journalctl -rb`
 * `systemctl --failed`
 * `systemctl list-units --type=service --state=active`
 * `systemctl list-units --type=timer --state=active`
 * `systemctl list-timers`
-* `journalctl -r -u borg.timer`
+* `journalctl -ru borg.timer`
 * `systemctl list-units --type=mount`
 * `systemctl list-units --type=automount`
 * `findmnt`
@@ -148,6 +167,7 @@ bunch of linux commands
 * `sudo tcpdump -n udp port 21116` - see udp traffic on a port
 * `pacman -F <path to a file>` - which package owns that file
 * `grep -i upgraded /var/log/pacman.log | tac | less` - last upgraded packages
+* `duf`
 
 # Encountered issues
 
