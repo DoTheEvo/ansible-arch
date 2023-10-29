@@ -42,7 +42,7 @@ the `-K` is short for `--ask-become-pass` which will prompt for password
 
 **Removal**<br>
 After running playbooks it be good to remove ansible package
-and bunch of its dependencies. Saves \~500MB and noise during updates.
+and bunch of its dependencies. Saves \~600MB and noise during updates.
 
 * `sudo pacman -Rns ansible`
 
@@ -67,6 +67,7 @@ useful terminal programs, settings, maintenance services
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increase allowed failed login attempts to 10 before lock out
 * enable members of wheel group to sudo
+* add current user to root group and disable need for entering sudo password
 * services to install and enable
     * ssh - remote access
     * nnn - get plugins, no sudo needed
@@ -117,7 +118,8 @@ useful terminal programs, settings, maintenance services
 After experiencing [a kernel regression](https://bbs.archlinux.org/viewtopic.php?id=288723),
 it became apparent that switch to [lts kernel](https://www.kernel.org/category/releases.html)
 should be the default. Archinstall script on ISO supports the choice of lts kernel
-during installation. This playbook solves it for already running machines.
+during installation. This playbook solves it for already running machines,
+if they use grub or systemd-boot.
 
 Be careful.
 
@@ -183,6 +185,7 @@ bunch of linux commands
 * If **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
   before updating everything else with `pacman -Syu`.<br>
   Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
-  It's part of the core playbook.
+  It's part of the core playbook.<br>
+  It's run history be checked - `journalctl -ru archlinux-keyring-wkd-sync.timer`
 * To **update zim** zsh framework- `zimfw upgrade` and `zimfw update`.
 

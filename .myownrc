@@ -20,10 +20,8 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 # ----------------------------------------------------------------------------
 # NNN FILE MANAGER  ----------------------------------------------------------
 
-# n runs nnn as root but keeps users environmental variables
-# it also shows hidden files
-# also show file/directory owner in status bar of currently shown file
-alias n='sudo -E nnn -H -U'
+# nnn alias that shows hidden files, ownership and filter without entering
+alias n='nnn -H -U -A'
 
 # enable trash; different colors for tabs; bookmarks
 export NNN_TRASH=1
