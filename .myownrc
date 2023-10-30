@@ -15,19 +15,24 @@ alias ip='ip --color=auto'
 # ----------------------------------------------------------------------------
 # FZF  -----------------------------------------------------------------------
 
+# fzf just filters whatever default command gives it
+# fd is simpler and faster find command so it is used
 export FZF_DEFAULT_COMMAND='fd --hidden'
+export FZF_DEFAULT_OPTS="--exact"
 
 # ----------------------------------------------------------------------------
 # NNN FILE MANAGER  ----------------------------------------------------------
 
 # nnn alias that shows hidden files, ownership and filter without entering
 alias n='nnn -H -U -A'
+# sudo version
+alias nnnn='sudo -E nnn -H -U -A'
 
 # enable trash; different colors for tabs; bookmarks
 export NNN_TRASH=1
 export NNN_COLORS='2136'
 export NNN_BMS='h:~;d:~/docker;e:/etc;s:/etc/systemd/system;m:/mnt;v:/var'
-export NNN_PLUG='f:fzcd;'
+export NNN_PLUG='f:fzcd;'   # to use fzf in nnn press ";f"
 
 # shell opened from nnn using ! hotkey has indication of depth
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"

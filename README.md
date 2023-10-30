@@ -133,6 +133,23 @@ to *change* 143 virtual machines somewhere on the cloud.
 To go from local to remote, edit inventory, replace local entries
 with IPs of machines you want to *change*.
 
+### Personal workflow
+
+The core application is `nnn` file manager.<br>
+launched by `n` command, or `nnnn` to run it as root, but with user ENVS
+
+* nnn is configured through exports in `.myownrc` file and through flags
+  used in the `n` and `nnnn`
+* `?` key - shows hotkeys, can also see what bookmarks are set<br>
+  bookmarks are used by pressing 'b' and then one of the offered letters,
+  like 'h' for home or 'e' for /etc
+* `!` key - opens terminal in the current directory, to return back to `nnn`
+  press `ctrl+d`, there is `N1` indication that we are in a terminal opened
+  from under `nnn`
+* `e` key - edits currently selected file in preset editor - micro for me
+* `;f` keys - open fzf file search in current directory,
+
+
 # Useful
 
 links

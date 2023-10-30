@@ -176,14 +176,6 @@
       become: no
       shell: "curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh"
 
-    # - name: disable need for sudo password for nnn
-    #   lineinfile:
-    #     path: /etc/sudoers.d/02_no_pswd_nnn
-    #     state: present
-    #     line: "ALL ALL=NOPASSWD:SETENV: /usr/bin/nnn"
-    #     validate: /usr/sbin/visudo -cf %s
-    #     create: yes
-
 # LOCATE THE QUICK FILE SEARCH  ----------------------------------------------
 
     - name: install plocate
