@@ -4,6 +4,7 @@
   gather_facts: no
   become: yes
   vars:
+    uefi_detected: false
     grub_detected: false
     systemd_boot_detected: false
 
@@ -12,6 +13,18 @@
 # ----------------------------------------------------------------------------
 # ----------------------  DETECTION  ---------------------------------------
 # ----------------------------------------------------------------------------
+
+# UEFI DETECTION  ------------------------------------------------------------
+
+    - name: uefi detection
+      stat:
+        path: "/sys/firmware/efi"
+      register: output_efi_check
+
+    - name: set uefi_detected to true if detected
+      set_fact:
+          uefi_detected: true
+      when: output_efi_check.stat.exists
 
 # SYSTEMD-BOOT DETECTION  ----------------------------------------------------
 
@@ -41,6 +54,7 @@
 
 # DETECTION RESULTS AND EARLY TERMINATION OF THE PLAYBOOK --------------------
 
+    - debug: msg="uefi_detected - {{ uefi_detected }}"
     - debug: msg="systemd_boot_detected - {{ systemd_boot_detected }}"
     - debug: msg="grub_detected - {{ grub_detected }}"
 
@@ -55,6 +69,12 @@
       when:
       - systemd_boot_detected == false
       - grub_detected == false
+
+    - name: end the playbook if grub and uefi are detected
+      meta: end_host
+      when:
+      - grub_detected == true
+      - uefi_detected == true
 
 # ----------------------------------------------------------------------------
 # ----------------------  INSTALL  -----------------------------------------
@@ -153,5 +173,6 @@
       shell: grub-mkconfig -o /boot/grub/grub.cfg
       args:
         executable: /usr/bin/bash
-      when: grub_detected == true
-
+      when:
+      - grub_detected == true
+      - uefi_detected == false

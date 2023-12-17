@@ -57,8 +57,8 @@ useful terminal programs, settings, maintenance services
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
   nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
-  unarchiver, duf, ncdu, htop, iotop, glances, nmap, gnu-netcat, tcpdump,
-  net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
+  unarchiver, fastfetch, duf, ncdu, htop, iotop, glances, nmap, gnu-netcat,
+  tcpdump, net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
@@ -148,6 +148,7 @@ launched by `n` command, or `nnnn` to run it as root, but with user ENVS
   from under `nnn`
 * `e` key - edits currently selected file in preset editor - micro for me
 * `;f` keys - open fzf file search in current directory,
+* `d` key - switches to detail view, pressing `t` and `d` shows directories size
 
 
 # Useful

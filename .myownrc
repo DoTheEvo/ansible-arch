@@ -24,7 +24,15 @@ export FZF_DEFAULT_OPTS="--exact"
 # NNN FILE MANAGER  ----------------------------------------------------------
 
 # nnn alias that shows hidden files, ownership and filter without entering
-alias n='nnn -H -U -A'
+# nnn starts in starting_dir if it exists
+
+starting_dir="$HOME/docker"
+if [ -d "$starting_dir" ]; then
+    alias n="cd $starting_dir && nnn -H -U -A"
+else
+    alias n="nnn -H -U -A"
+fi
+
 # sudo version
 alias nnnn='sudo -E nnn -H -U -A'
 
