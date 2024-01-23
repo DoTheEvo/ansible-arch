@@ -18,42 +18,42 @@
       pacman:
         update_cache: yes
         name:
-          - nano
-          - micro
-          - man-db
-          - git
-          - curl
-          - wget
-          - rsync
-          - nnn
-          - fd
-          - fzf
-          - bat
-          - tree
-          - unarchiver
-          - fastfetch
-          - duf
-          - ncdu
-          - htop
-          - iotop
-          - glances
-          - nethogs
-          - nmap
-          - gnu-netcat
-          - tcpdump
-          - net-tools
-          - iproute2
-          - bind
-          - nload
-          - sysfsutils
-          - lsof
-          - borg
-          - fuse
-          - python-llfuse
-          - python-pip
-          - python-setuptools
-          - python-pexpect
-          - sqlite
+          - nano                    # editor
+          - micro                   # editor
+          - man-db                  # help pages
+          - git                     # to clone github repos
+          - curl                    # download utility
+          - wget                    # download utility
+          - rsync                   # copy utility
+          - nnn                     # file manager
+          - fd                      # simpler find
+          - fzf                     # fuzzy filter, useful for file search
+          - bat                     # prettier cat
+          - tree                    # show files/directories structure
+          - unarchiver              # extract any archive
+          - fastfetch               # system info
+          - duf                     # prettier df
+          - ncdu                    # investigate disk usage
+          - htop                    # resource monitor
+          - btop                    # better resource monitor
+          - glances                 # system monitor
+          - iotop                   # disk use monitor
+          - nethogs                 # network monitor per process
+          - nmap                    # network scan
+          - gnu-netcat              # diagnose network issues using tiny server
+          - tcpdump                 # diagnose network issues by wathing ports
+          - net-tools               # network utilities like arp, netstat
+          - iproute2                # network utilities like ss
+          - bind                    # DNS utilities, like nslookup
+          - nload                   # monitor bandwidth
+          - sysfsutils              # utility to deal with sysfs
+          - lsof                    # list open files
+          - fuse                    # mounting file systems
+          - sqlite                  # simple database and utilities for it
+          - python-llfuse           # bindings for fuse mounting
+          - python-pip              # package manager
+          - python-setuptools       # additional packaging tools
+          - python-pexpect          # child application control
 
 # YAY TO ACCESS AUR REPOSITORY  ----------------------------------------------
 

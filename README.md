@@ -34,7 +34,6 @@ install arch linux ([archinstall](https://github.com/archlinux/archinstall)), lo
 * run the playbooks you want
     * `ansible-playbook -u $USER -K playbook_core.yml`
     * `ansible-playbook -u $USER -K playbook_zsh.yml`
-    * `ansible-playbook -u $USER -K playbook_lts_kernel.yml`
     * `ansible-playbook -u $USER -K playbook_docker.yml`
 
 yes, you write `$USER` there, which puts in the user you are logged in <br>
@@ -57,7 +56,7 @@ useful terminal programs, settings, maintenance services
 * arch update/upgrade, equivalent of `pacman -Syu`
 * install:<br>
   nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
-  unarchiver, fastfetch, duf, ncdu, htop, iotop, glances, nmap, gnu-netcat,
+  unarchiver, fastfetch, duf, ncdu, htop, btop, iotop, glances, nmap, gnu-netcat,
   tcpdump, net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
@@ -108,20 +107,15 @@ useful terminal programs, settings, maintenance services
 
 * detect bootloader - systemd or grub
 * installs linux-lts package
-* if systemd boot
-  - make a copy of the existing config, alter it to lts,
-  make it the default
-* uninstall regular linux kernel
-* if grub
-   - generate new grub.cfg
+* switch to lts kernel
 
 After experiencing [a kernel regression](https://bbs.archlinux.org/viewtopic.php?id=288723),
 it became apparent that switch to [lts kernel](https://www.kernel.org/category/releases.html)
-should be the default. Archinstall script on ISO supports the choice of lts kernel
-during installation. This playbook solves it for already running machines,
-if they use grub or systemd-boot.
+should be the default.<br>
+Archinstall script on ISO supports the choice of lts kernel during the installation.
+This playbook solves it for already running machines, if they use grub or systemd-boot.
 
-Be careful.
+Be careful. Snapshot before you try.
 
 ### Local deployment
 
@@ -207,3 +201,14 @@ bunch of linux commands
   It's run history be checked - `journalctl -ru archlinux-keyring-wkd-sync.timer`
 * To **update zim** zsh framework- `zimfw upgrade` and `zimfw update`.
 
+# disk commands
+
+* equivalent of win `diskpart` > `clean` that wipes everything<br>
+  `sudo dd if=/dev/zero of=/dev/sdX bs=1M count=1`
+* create clean partition<br>
+  `sudo cfdisk /dev/sdX`<br>
+  `sudo mkfs.ext4 /dev/sdx1`
+* check uuid<br>
+  `sudo lsblk -f`
+* fstab entry<br>
+  `UUID=e2516713-8c13-430f-84a6-3c2fefe3ec1e   /mnt/data-1   ext4  rw,noatime,nofail 0 1`
