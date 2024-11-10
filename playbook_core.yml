@@ -36,6 +36,7 @@
           - ncdu                    # investigate disk usage
           - htop                    # resource monitor
           - btop                    # better resource monitor
+          - rocm-smi-lib            # gpu support for btop
           - glances                 # system monitor
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
@@ -139,7 +140,7 @@
 
 # USERS PERMISSIONS  ---------------------------------------------------------
 
-    - name: add the user to the root group
+    - name: add the user to the root group, its to be able to enter directories
       user:
         name: "{{ ansible_user }}"
         groups: root

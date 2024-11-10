@@ -39,5 +39,11 @@
             "log-opts": {
               "max-size": "50m",
               "max-file": "5"
-            }
+            },
+            "default-address-pools": [
+              {
+                "base" : "172.16.0.0/12",
+                "size" : 24
+              }
+            ]
           }

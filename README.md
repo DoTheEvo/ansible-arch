@@ -57,7 +57,7 @@ useful terminal programs, settings, maintenance services
 * install:<br>
   nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
   unarchiver, fastfetch, duf, ncdu, htop, btop, iotop, glances, nmap, gnu-netcat,
-  tcpdump, net-tools, iproute2, bind, nload, sysfsutils, lsof, borg, fuse,
+  tcpdump, net-tools, iproute2, bind, nload, sysfsutils, lsof, fuse,
   python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
@@ -147,10 +147,6 @@ launched by `n` command, or `nnnn` to run it as root, but with user ENVS
 
 # Useful
 
-links
-
-* [virtualization_type detection script](https://github.com/ansible/ansible/blob/devel/lib/ansible/module_utils/facts/virtual/linux.py)
-
 bunch of linux commands
 
 * `journalctl -p 3 -rb`
@@ -212,3 +208,26 @@ bunch of linux commands
   `sudo lsblk -f`
 * fstab entry<br>
   `UUID=e2516713-8c13-430f-84a6-3c2fefe3ec1e   /mnt/data-1   ext4  rw,noatime,nofail 0 1`
+
+# dd commands
+
+* create bootable usb and dont want ventoy for some reason<br>
+  `sudo dd bs=4M if=archlinux-2023.12.01-x86_64.iso of=/dev/sdX status=progress oflag=direct`
+
+sure as hell I am not using dd to backup stuff, but in case...
+
+* backup<br>
+  `dd if=/dev/sdc conv=noerror | pv | dd of=~/backup.img`
+* restore<br>
+  `dd if=~/backup.img conv=noerror | pv | dd of=/dev/sdc`
+
+
+https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be_useful_for_arch/
+
+
+# devices and drivers info
+
+* `lspci -k` - which device which driver
+* `lshw -C network` - network info
+* `lspci -vvv | grep --color ASPM` - list pci devices info and highlight aspm
+
