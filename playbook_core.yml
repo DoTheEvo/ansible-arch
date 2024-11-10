@@ -132,7 +132,7 @@
 
     - name: enable members of wheel group to sudo
       lineinfile:
-        path: /etc/sudoers.d/01_wheel_allow_sudo
+        path: /etc/sudoers.d/98_wheel_allow_sudo
         state: present
         line: "%wheel ALL=(ALL:ALL) ALL"
         validate: /usr/sbin/visudo -cf %s
@@ -140,7 +140,7 @@
 
 # USERS PERMISSIONS  ---------------------------------------------------------
 
-    - name: add the user to the root group, its to be able to enter directories
+    - name: add the user to the root group, to be able to enter directories
       user:
         name: "{{ ansible_user }}"
         groups: root
@@ -148,7 +148,7 @@
 
     - name: disable need for sudo password for the current user
       lineinfile:
-        path: "/etc/sudoers.d/02_no_pswd_for_{{ ansible_env.SUDO_UID }}"
+        path: "/etc/sudoers.d/99_no_pswd_for_{{ ansible_env.SUDO_UID }}"
         state: present
         line: "{{ ansible_user }} ALL=(ALL:ALL) NOPASSWD: ALL"
         validate: /usr/sbin/visudo -cf %s
