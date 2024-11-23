@@ -30,7 +30,7 @@
         state: directory
         mode: '0755'
 
-    - name: set default max logs size to 250MB and set logs rotation
+    - name: daemon.json, sets max logs size and prevents docker network getting in to 192.168.0.0
       copy:
         dest: '/etc/docker/daemon.json'
         content: |

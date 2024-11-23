@@ -36,7 +36,7 @@
           - ncdu                    # investigate disk usage
           - htop                    # resource monitor
           - btop                    # better resource monitor
-          - rocm-smi-lib            # gpu support for btop
+          # - rocm-smi-lib            # gpu support for btop
           - glances                 # system monitor
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
@@ -44,6 +44,7 @@
           - gnu-netcat              # diagnose network issues using tiny server
           - tcpdump                 # diagnose network issues by wathing ports
           - net-tools               # network utilities like arp, netstat
+          - iperf3                  # network speed test tool
           - iproute2                # network utilities like ss
           - bind                    # DNS utilities, like nslookup
           - nload                   # monitor bandwidth
