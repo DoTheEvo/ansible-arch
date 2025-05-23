@@ -12,6 +12,13 @@ alias statt='stat -c "%A %a %n" *'
 # ip command with colors
 alias ip='ip --color=auto'
 
+# wireguard - show active tunnels
+# to not need sudo: sudo setcap cap_net_admin+ep $(which wg)
+alias wgs='wg show'
+# wireguard - brings down current active wireguard interface
+# to not need sudo edit sudoers
+alias wgd='wg show interfaces | xargs -n1 sudo wg-quick down'
+
 # ----------------------------------------------------------------------------
 # FZF  -----------------------------------------------------------------------
 

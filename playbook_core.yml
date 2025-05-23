@@ -51,6 +51,7 @@
           - sysfsutils              # utility to deal with sysfs
           - lsof                    # list open files
           - fuse                    # mounting file systems
+          - arch-install-scripts    # it has genfstab
           - sqlite                  # simple database and utilities for it
           - python-llfuse           # bindings for fuse mounting
           - python-pip              # package manager
@@ -325,31 +326,6 @@
         enabled: yes
         state: started
 
-# NEOFETCH  ------------------------------------------------------------------
-
-    - name: install neofetch
-      pacman:
-        name:
-          - neofetch
-
-    - name: run neofetch to generate config
-      become: no
-      command: neofetch
-
-    - name: enable disk info in neofetch
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Disk" disk$'
-        line: '    info "Disk" disk'
-
-    - name: enable local IP info in neofetch
-      become: no
-      lineinfile:
-        path: ~/.config/neofetch/config.conf
-        regexp: '.*# info "Local IP" local_ip$'
-        line: '    info "Local IP" local_ip'
-
 # HYPERV  --------------------------------------------------------------------
 
     - name: if hyperv, install hyperv package
@@ -428,6 +404,13 @@
       copy:
         src: .config/micro
         dest: ~/.config
+        mode: 0644
+
+    - name: copy the same config directory in to root
+      become: no
+      copy:
+        src: .config/micro
+        dest: /root/.config
         mode: 0644
 
     - name: set default editor in .bashrc

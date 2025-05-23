@@ -58,7 +58,8 @@ useful terminal programs, settings, maintenance services
   nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
   unarchiver, fastfetch, duf, ncdu, htop, btop, iotop, glances, nmap, gnu-netcat,
   tcpdump, net-tools, iperf3, iproute2, bind, nload, sysfsutils, lsof, fuse,
-  python-llfuse, python-pip, python-setuptools, python-pexpect, sqlite
+  arch-install-scripts, python-llfuse, python-pip, python-setuptools,
+  python-pexpect, sqlite
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
 * in pacman.conf enable color and enable parallel downloads
@@ -78,7 +79,6 @@ useful terminal programs, settings, maintenance services
     * paccache - weekly clearing of pacman cache
     * reflector - weekly update of mirrorlist - !!change the country codes!!
     * logrotate - if need to prevent logs from growing
-* install neofetch
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
 * install micro text editor, copy config, keybinds, syntax highlight
@@ -231,3 +231,11 @@ https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be
 * `lshw -C network` - network info
 * `lspci -vvv | grep --color ASPM` - list pci devices info and highlight aspm
 
+# to do
+
+- docker - prefill history with docker commands up/down/ctop/...
+- switch network enp to PermanentMACAddress=74:d4:35:97:fd:da
+
+# useful
+
+* [journalctl guide](https://betterstack.com/community/guides/logging/how-to-control-journald-with-journalctl)
