@@ -32,6 +32,7 @@
           - tree                    # show files/directories structure
           - unarchiver              # extract any archive
           - fastfetch               # system info
+          - inxi               # system info
           - duf                     # prettier df
           - ncdu                    # investigate disk usage
           - htop                    # resource monitor
