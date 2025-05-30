@@ -408,7 +408,6 @@
         mode: 0644
 
     - name: copy the same config directory in to root
-      become: no
       copy:
         src: .config/micro
         dest: /root/.config
