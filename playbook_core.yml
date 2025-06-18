@@ -397,13 +397,13 @@
 # XCPNG  --------------------------------------------------------------------
 
     - block:
-        - name: install guest additions using yay
+        - name: if xcpng - xen, install guest additions using yay
           become: false
           shell: yay -S --noconfirm --needed xe-guest-utilities-xcp-ng
           args:
             executable: /bin/bash
 
-        - name: enable and start xe-linux-distribution service
+        - name: if xcpng - xen, enable and start xe-linux-distribution service
           systemd:
             name: xe-linux-distribution.service
             enabled: yes
