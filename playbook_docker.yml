@@ -30,7 +30,7 @@
         state: directory
         mode: '0755'
 
-    - name: daemon.json, sets max logs size and prevents docker network getting in to 192.168.0.0
+    - name: daemon.json, sets max logs size, and prevent docker network getting in to 192.168.0.0
       copy:
         dest: '/etc/docker/daemon.json'
         content: |
@@ -49,11 +49,13 @@
           }
 
     - name: Check if .zhistory exists
+      become: false
       stat:
         path: "{{ ansible_env.HOME }}/.zhistory"
       register: zhistory_file
 
     - name: Add common commands to zsh history
+      become: false
       blockinfile:
         path: /home/spravca/.zhistory
         block: |
