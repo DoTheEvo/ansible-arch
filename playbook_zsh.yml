@@ -11,24 +11,20 @@
           - zsh
           - curl
 
-    # ITS NOT WORKING THE WRITTEN HISTORY IS PROBABLY DIFFERENT SESSION
-    # AND DUNNO HOW TO TARGET THAT SESSION
-    #
-    # - name: write current active bash history in to the file .bash_history
-    #   shell: history -a
-    #   args:
-    #     executable: /usr/bin/bash
+    # BASH HISTORY IS ONLY WRITTEN ON USER EXIT
+    # "history -a" WRITES CURRENT SESSION COMMANDS
+    # IDEALLY EXECUTED RIGHT BEFORE RUNNING THIS PLAYBOOK
 
     - name: check if .bash_history exists
       stat:
-        path: "~/.bash_history"
-      register: stat_chech_result
+        path: "{{ ansible_env.HOME }}/.bash_history"
+      register: bash_history_file
 
     - name: add content from .bash_history to .zhistory
-      shell: strings -eS ~/.bash_history >> ~/.zhistory
+      shell: cat "{{ ansible_env.HOME }}/.bash_history" >> "{{ ansible_env.HOME }}/.zsh_history"
       args:
         executable: /usr/bin/bash
-      when: stat_chech_result.stat.exists
+      when: bash_history_file.stat.exists
 
     - name: change shell
       become: yes

@@ -48,16 +48,12 @@
             ]
           }
 
-    - name: Get list of users
-      getent:
-        database: passwd
-
     - name: Check if .zhistory exists
       stat:
-        path: /home/tester/.zhistory
+        path: "{{ ansible_env.HOME }}/.zhistory"
       register: zhistory_file
 
-    - name: Add common commands to zsh history if 'spravca' exists
+    - name: Add common commands to zsh history
       blockinfile:
         path: /home/spravca/.zhistory
         block: |
@@ -66,10 +62,11 @@
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
           sudo reboot now
+          sudo shutdown now
           sudo pacman -Sy archlinux-keyring
         create: yes
         owner: spravca
         group: spravca
         mode: '0600'
-        marker: "# {mark} favorite commands"
-      when: ansible_facts['getent_passwd'].spravca is defined
+        marker: "# {mark} ansible_user added commands"
+      when: zhistory_file.stat.exists
