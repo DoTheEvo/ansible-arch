@@ -305,8 +305,7 @@
 
     - name: do initial run of reflector.service
       systemd:
-        name: reflector
-        enabled: yes
+        name: reflector.service
         state: started
 
 # LOGROTATE  -----------------------------------------------------------------
