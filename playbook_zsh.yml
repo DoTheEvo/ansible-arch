@@ -21,7 +21,7 @@
       register: bash_history_file
 
     - name: add content from .bash_history to .zhistory
-      shell: cat "{{ ansible_env.HOME }}/.bash_history" >> "{{ ansible_env.HOME }}/.zsh_history"
+      shell: cat "{{ ansible_env.HOME }}/.bash_history" >> "{{ ansible_env.HOME }}/.zhistory"
       args:
         executable: /usr/bin/bash
       when: bash_history_file.stat.exists
