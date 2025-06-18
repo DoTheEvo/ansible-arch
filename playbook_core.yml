@@ -44,6 +44,7 @@
           - nmap                    # network scan
           - gnu-netcat              # diagnose network issues using tiny server
           - tcpdump                 # diagnose network issues by wathing ports
+          - inetutils               # network utilities like hostname
           - net-tools               # network utilities like arp, netstat
           - iperf3                  # network speed test tool
           - iproute2                # network utilities like ss

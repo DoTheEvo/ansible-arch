@@ -57,8 +57,8 @@ useful terminal programs, settings, maintenance services
 * install:<br>
   nano, micro, man-db, git, curl, wget, rsync, nnn, fd, fzf, bat, tree,
   unarchiver, fastfetch, duf, ncdu, htop, btop, iotop, glances, nmap, gnu-netcat,
-  tcpdump, net-tools, iperf3, iproute2, bind, nload, sysfsutils, lsof, fuse,
-  arch-install-scripts, python-llfuse, python-pip, python-setuptools,
+  tcpdump, inetutils, net-tools, iperf3, iproute2, bind, nload, sysfsutils, lsof,
+  fuse, arch-install-scripts, python-llfuse, python-pip, python-setuptools,
   python-pexpect, sqlite
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
