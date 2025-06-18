@@ -51,7 +51,7 @@
     - name: Check if .zhistory exists
       become: false
       stat:
-        path: "{{ ansible_env.HOME }}/.zhistory"
+        path: "{{ lookup('env', 'HOME') }}/.zhistory"
       register: zhistory_file
 
     - name: Add common commands to zsh history
@@ -67,8 +67,6 @@
           sudo shutdown now
           sudo pacman -Sy archlinux-keyring
         create: yes
-        owner: spravca
-        group: spravca
         mode: '0600'
         marker: "# {mark} ansible_user added commands"
       when: zhistory_file.stat.exists
