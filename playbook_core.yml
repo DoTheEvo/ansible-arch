@@ -104,12 +104,6 @@
         regexp: '^#Color$'
         line: 'Color'
 
-    - name: pacman - enable ParallelDownloads = 5
-      lineinfile:
-        path: /etc/pacman.conf
-        regexp: '#ParallelDownloads = 5'
-        line: 'ParallelDownloads = 5'
-
     - name: makepkg - disable compression
       lineinfile:
         path: /etc/makepkg.conf

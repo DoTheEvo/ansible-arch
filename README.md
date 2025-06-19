@@ -62,7 +62,7 @@ useful terminal programs, settings, maintenance services
   python-pexpect, sqlite
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
-* in pacman.conf enable color and enable parallel downloads
+* in pacman.conf enable color
 * in makepkg.conf disable compression and enable parallel compilation
 * `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increase allowed failed login attempts to 10 before lock out
