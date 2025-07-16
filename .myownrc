@@ -24,6 +24,7 @@ alias wgd='wg show interfaces | xargs -n1 sudo wg-quick down'
 
 # fzf just filters whatever default command gives it
 # fd is simpler and faster find command so it is used
+# can be used in nnn with ";" and "f", or anywhere with "fzf"
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS="--exact"
 

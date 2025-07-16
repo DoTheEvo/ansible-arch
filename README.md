@@ -47,6 +47,9 @@ and bunch of its dependencies. Saves \~600MB and noise during updates.
 
 # Playbooks
 
+You are expected to click on those playbooks yml links,
+to see how simple and nicely readable it all is.
+
 [executing_playbook.webm](https://user-images.githubusercontent.com/1690300/196008623-278f5928-bb4d-4931-af5c-0acb03f4ab7f.webm)
 
 ### [playbook_core.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_core.yml)
