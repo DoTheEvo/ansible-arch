@@ -32,18 +32,18 @@
           - tree                    # show files/directories structure
           - unarchiver              # extract any archive
           - fastfetch               # system info
-          - inxi               # system info
+          - inxi                    # system info
           - duf                     # prettier df
-          - ncdu                    # investigate disk usage
+          - ncdu                    # investigate disk space usage
           - htop                    # resource monitor
           - btop                    # better resource monitor
-          # - rocm-smi-lib            # gpu support for btop
+          # - rocm-smi-lib          # gpu support for btop
           - glances                 # system monitor
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
           - nmap                    # network scan
           - gnu-netcat              # diagnose network issues using tiny server
-          - tcpdump                 # diagnose network issues by wathing ports
+          - tcpdump                 # diagnose network issues by watching ports
           - inetutils               # network utilities like hostname
           - net-tools               # network utilities like arp, netstat
           - iperf3                  # network speed test tool
