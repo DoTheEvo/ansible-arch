@@ -1,0 +1,32 @@
+filetype: fstab
+
+detect:
+  filename: "fstab$"
+
+rules:
+  - comment:
+      start: "#"
+      end: "$"
+      rules: []
+
+  - constant:
+      start: "/dev/"
+      end: "[[:space:]]"
+      rules: []
+
+  - constant:
+      start: "UUID="
+      end: "[[:space:]]"
+      rules: []
+
+  - constant:
+      start: "LABEL="
+      end: "[[:space:]]"
+      rules: []
+
+  - identifier:
+      start: "/"
+      end: "[[:space:]]"
+      rules: []
+
+  - statement: "\\b(ext2|ext3|ext4|xfs|btrfs|swap|vfat|ntfs)\\b"

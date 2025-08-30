@@ -60,6 +60,7 @@
         path: /home/spravca/.zhistory
         block: |
           docker compose up -d
+          docker compose up --force-recreate -d
           docker compose down
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite

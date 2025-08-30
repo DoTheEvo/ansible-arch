@@ -53,7 +53,6 @@
           - sysfsutils              # utility to deal with sysfs
           - lsof                    # list open files
           - fuse                    # mounting file systems
-          - arch-install-scripts    # it has genfstab
           - sqlite                  # simple database and utilities for it
           - python-llfuse           # bindings for fuse mounting
           - python-pip              # package manager
