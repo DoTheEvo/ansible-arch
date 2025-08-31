@@ -39,6 +39,7 @@
           - btop                    # better resource monitor
           # - rocm-smi-lib          # gpu support for btop
           - glances                 # system monitor
+          - sysstat                 # performance monitoring tools, like iostat
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
           - nmap                    # network scan
@@ -417,13 +418,14 @@
       copy:
         src: .config/micro
         dest: ~/.config
-        mode: 0644
+        mode: preserve
 
-    - name: copy the same config directory in to root
+    - name: symlink for root, so that  micro config
       copy:
-        src: .config/micro
+        src: ~/.config
         dest: /root/.config
-        mode: 0644
+        state: link
+        force: yes
 
     - name: set default editor in .bashrc
       become: no

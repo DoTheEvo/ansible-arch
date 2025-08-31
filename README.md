@@ -148,6 +148,23 @@ launched by `n` command, or `nnnn` to run it as root, but with user ENVS
 * `d` key - switches to detail view, pressing `t` and `d` shows directories size
 
 
+### Micro copy paste when SSH
+
+* Micro needs in the *settings.json*: `"clipboard": "terminal"`<br>
+  **root** also requires that in the config, or when using sudo copy paste
+  would not work.
+* The terminal that you use must support [OSC 52](https://github.com/zyedidia/micro/blob/master/runtime/help/copypaste.md).<br>
+  I use Alacritty and the support needs to be enabled, in the *alacritty.toml*:
+
+  ```
+  [terminal]
+  osc52 = "CopyPaste"
+  ```
+
+After that ctrl+c and ctr+v just work.<br>
+The `playbook_core.yml` takes care of setting up micro,
+for the user and for the root.
+
 # Useful
 
 bunch of linux commands
@@ -182,6 +199,8 @@ bunch of linux commands
 * `pacman -F <path to a file>` - which package owns that file
 * `grep -i upgraded /var/log/pacman.log | tac | less` - last upgraded packages
 * `duf`
+* `sudo iotop -ao` - disk activity
+* `sudo blktrace -d /dev/sdd -o - | blkparse -i -` - disk activity
 
 # Encountered issues
 
