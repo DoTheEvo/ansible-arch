@@ -420,12 +420,24 @@
         dest: ~/.config
         mode: preserve
 
-    - name: symlink for root, so that  micro config
-      copy:
-        src: ~/.config
-        dest: /root/.config
+    - name: ensure /root/.config exists
+      file:
+        path: /root/.config
+        state: directory
+        mode: '0755'
+
+    - name: remove root micro config if it exists
+      file:
+        path: /root/.config/micro
+        state: absent
+
+    - name: symlink users micro config for the root, so that it works in sudo
+      file:
+        src: "/home/{{ ansible_user }}/.config/micro"
+        dest: /root/.config/micro
         state: link
         force: yes
+        follow: false
 
     - name: set default editor in .bashrc
       become: no
