@@ -32,10 +32,10 @@ export FZF_DEFAULT_OPTS="--exact"
 # NNN FILE MANAGER  ----------------------------------------------------------
 
 # nnn alias that shows hidden files, ownership and filter without entering
-# nnn starts in starting_dir if it exists
+# nnn starts in docker directory if it exists, name can be in whatever case
 
-starting_dir="$HOME/docker"
-if [ -d "$starting_dir" ]; then
+starting_dir=$(find $HOME -maxdepth 1 -type d -iname "docker" | head -n 1)
+if [ -n "$starting_dir" ] && [ -d "$starting_dir" ]; then
     alias n="cd $starting_dir && nnn -H -U -A"
 else
     alias n="nnn -H -U -A"
