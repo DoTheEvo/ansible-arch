@@ -365,7 +365,7 @@
           - ansible_facts['virtualization_role'] == 'guest'
           - ansible_facts['virtualization_type'] == 'VMware'
 
-# VIRTUALBOX  ---------------------------------------------------------------
+# VIRTUALBOX  ----------------------------------------------------------------
 
     - name: if virtualbox, install guest additions NON-X version
       pacman:
@@ -386,7 +386,7 @@
           - ansible_facts['virtualization_role'] == 'guest'
           - ansible_facts['virtualization_type'] == 'virtualbox'
 
-# XCPNG  --------------------------------------------------------------------
+# XCPNG  ---------------------------------------------------------------------
 
     - block:
         - name: if xcpng - xen, install guest additions using yay
@@ -404,6 +404,47 @@
       when:
         - ansible_facts['virtualization_role'] == 'guest'
         - ansible_facts['virtualization_type'] == 'xen'
+
+# NETWORKD CONFIG CHANGE TO MAC
+
+    - name: check if systemd-networkd is active
+      command: systemctl is-active systemd-networkd
+      register: networkd_status
+      ignore_errors: yes
+
+    - block:
+
+        - name: Starting MAC-based network conversion
+          debug:
+            msg: >
+              Converting network configuration from name-based to MAC-based.
+              This prevents issues if hardware is added.
+              A backup of the network file is created if making changes.
+
+        - name: set facts for the default interface and it's MAC
+          set_fact:
+            primary_iface: "{{ ansible_default_ipv4.interface }}"
+            mac_addr: "{{ hostvars[inventory_hostname]['ansible_' + ansible_default_ipv4.interface]['macaddress'] }}"
+
+        - name: get the path to the network config file of the primary interface
+          command: networkctl status {{ primary_iface }} --json=short
+          register: net_status
+
+        - set_fact:
+            net_config_file: "{{ (net_status.stdout | from_json).NetworkFile }}"
+
+        - name: >
+            edit the network file,
+            replace match by name with match by mac address,
+            make backup if making changes
+          replace:
+            path: "{{ net_config_file }}"
+            regexp: '^Name={{ primary_iface }}[ \t]*$'
+            replace: "PermanentMACAddress={{ mac_addr }}"
+            backup: yes
+
+      when:
+        - networkd_status.stdout == "active"
 
 # SETUP MICRO TEXT EDITOR  ---------------------------------------------------
 
