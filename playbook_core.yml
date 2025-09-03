@@ -337,7 +337,6 @@
         enabled: yes
         state: started
       with_items:
-          - hv_fcopy_daemon.service
           - hv_kvp_daemon.service
           - hv_vss_daemon.service
       when:
