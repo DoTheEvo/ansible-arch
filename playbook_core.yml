@@ -116,12 +116,6 @@
         regexp: '#MAKEFLAGS="-j2"'
         line: 'MAKEFLAGS="-j$(nproc)"'
 
-    - name: fstab change relatime to noatime
-      replace:
-        path: /etc/fstab
-        regexp: 'relatime'
-        replace: 'noatime'
-
     - name: change number of failed logins that triger 10min lockout
       lineinfile:
         path: /etc/security/faillock.conf

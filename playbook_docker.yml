@@ -64,6 +64,7 @@
           docker compose down
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
+          docker network create caddy_net
           sudo reboot now
           sudo shutdown now
           sudo pacman -Sy archlinux-keyring
