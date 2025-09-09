@@ -68,6 +68,8 @@
           sudo reboot now
           sudo shutdown now
           sudo pacman -Sy archlinux-keyring
+          sudo chown $USER:$USER
+          sudo chmod +x
         create: yes
         mode: '0600'
         marker: "# {mark} ansible_user added commands"

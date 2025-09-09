@@ -67,7 +67,6 @@ useful terminal programs, settings, maintenance services
   set - remove make dependencies, always clean builds, cleanup after
 * in pacman.conf enable color
 * in makepkg.conf disable compression and enable parallel compilation
-* `noatime` set in fstab to avoid unnecessary writes of `relatime`
 * increase allowed failed login attempts to 10 before lock out
 * enable members of wheel group to sudo
 * add current user to root group and disable need for entering sudo password
