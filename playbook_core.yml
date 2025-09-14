@@ -44,7 +44,7 @@
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
           - nmap                    # network scan
-          - gnu-netcat              # diagnose network issues using tiny server
+          - openbsd-netcat          # diagnose network issues using tiny server
           - tcpdump                 # diagnose network issues by watching ports
           - inetutils               # network utilities like hostname
           - net-tools               # network utilities like arp, netstat

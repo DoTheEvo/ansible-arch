@@ -40,7 +40,7 @@ yes, you write `$USER` there, which puts in the user you are logged in <br>
 the `-K` is short for `--ask-become-pass` which will prompt for password
 
 **Removal**<br>
-After running playbooks it be good to remove ansible package
+After running the playbooks it be good to remove the ansible package
 and bunch of its dependencies. Saves \~600MB and noise during updates.
 
 * `sudo pacman -Rns ansible`
