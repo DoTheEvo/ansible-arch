@@ -83,6 +83,11 @@ useful terminal programs, settings, maintenance services
     * logrotate - if need to prevent logs from growing
 * check if in virtual machine and if vmware, hyperv, or virtualbox then
   install and enable supporting services
+* network setup changes
+  * change systemd network config, using mac insted of interface name,
+    this avoids issues on hardware changes
+  * disable DNSSEC that was enabled in september 2025
+  * 
 * install micro text editor, copy config, keybinds, syntax highlight
   set micro as the default editor in `.bashrc`
 
@@ -168,7 +173,6 @@ for the user and for the root.
 
 bunch of linux commands
 
-* `journalctl -p 3 -rb`
 * `journalctl -p 3 -rxb`
 * `journalctl -rb`
 * `systemctl --failed`

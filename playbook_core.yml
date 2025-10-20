@@ -400,6 +400,28 @@
         - ansible_facts['virtualization_role'] == 'guest'
         - ansible_facts['virtualization_type'] == 'xen'
 
+# DISABLE DNSSEC
+
+    - name: Disable DNSSEC in resolved.conf
+      lineinfile:
+        path: /etc/systemd/resolved.conf
+        line: 'DNSSEC=no'
+        insertafter: '^#DNSSEC=allow-downgrade'
+        state: present
+
+# MAKE RESOLVED WAIT FOR NETWORK TO FINISH ON BOOT
+
+    - name: Create systemd override for systemd-resolved
+      copy:
+        dest: /etc/systemd/system/systemd-resolved.service.d/override.conf
+        content: |
+          [Unit]
+          After=network-online.target
+          Wants=network-online.target
+        owner: root
+        group: root
+        mode: '0644'
+
 # NETWORKD CONFIG CHANGE TO MAC
 
     - name: check if systemd-networkd is active
