@@ -256,11 +256,20 @@ https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be
 * `lshw -C network` - network info
 * `lspci -vvv | grep --color ASPM` - list pci devices info and highlight aspm
 
-# to do
-
-- docker - prefill history with docker commands up/down/ctop/...
-- switch network enp to PermanentMACAddress=74:d4:35:97:fd:da
-
 # useful
 
 * [journalctl guide](https://betterstack.com/community/guides/logging/how-to-control-journald-with-journalctl)
+
+# Manual interventions during updates
+
+* 2025 - [community repo merged with extra](https://archlinux.org/news/cleaning-up-old-repositories/)<br>
+  `/etc/pacman.conf` - comment out community repo and the include under it
+* 2025 - [nvidia firmware thing](https://archlinux.org/news/linux-firmware-2025061312fe085f-5-upgrade-requires-manual-intervention/)<br>
+  `sudo pacman -Rdd linux-firmware`<br>
+  `sudo pacman -Syu linux-firmware`
+* 2025 - careful about [DNSSEC](https://www.reddit.com/r/archlinux/comments/1nlg0wf/latest_update_break_dns_for_anyone_else/)
+  being enabled by default
+
+# to do
+
+...

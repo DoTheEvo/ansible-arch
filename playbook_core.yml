@@ -281,10 +281,10 @@
         dest: '/etc/xdg/reflector/reflector.conf'
         content: |
           --save /etc/pacman.d/mirrorlist
-          --protocol http
-          --country SK,CZ
-          --score 20
-          --sort rate
+          --protocol https
+          --country SK,CZ,AT,PL
+          --latest 20
+          --sort score
 
     - name: enable and start reflector timer
       systemd:
