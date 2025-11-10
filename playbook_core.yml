@@ -411,6 +411,14 @@
 
 # MAKE RESOLVED WAIT FOR NETWORK TO FINISH ON BOOT
 
+    - name: Make sure override directory exists
+      file:
+        path: /etc/systemd/system/systemd-resolved.service.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
     - name: Create systemd override for systemd-resolved
       copy:
         dest: /etc/systemd/system/systemd-resolved.service.d/override.conf

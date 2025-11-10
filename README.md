@@ -272,4 +272,4 @@ https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be
 
 # to do
 
-...
+* switch from nnn to yazi 
