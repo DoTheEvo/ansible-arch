@@ -448,8 +448,8 @@
 
         - name: set facts for the default interface and it's MAC
           set_fact:
-            primary_iface: "{{ ansible_default_ipv4.interface }}"
-            mac_addr: "{{ hostvars[inventory_hostname]['ansible_' + ansible_default_ipv4.interface]['macaddress'] }}"
+            primary_iface: "{{ ansible_facts['default_ipv4']['interface'] }}"
+            mac_addr: "{{ ansible_facts['interfaces'][ansible_facts['default_ipv4']['interface']]['macaddress'] }}"
 
         - name: get the path to the network config file of the primary interface
           command: networkctl status {{ primary_iface }} --json=short

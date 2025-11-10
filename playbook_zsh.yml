@@ -17,11 +17,11 @@
 
     - name: check if .bash_history exists
       stat:
-        path: "{{ ansible_env.HOME }}/.bash_history"
+        path: "{{ ansible_facts['env']['HOME'] }}/.bash_history"
       register: bash_history_file
 
     - name: add content from .bash_history to .zhistory
-      shell: cat "{{ ansible_env.HOME }}/.bash_history" >> "{{ ansible_env.HOME }}/.zhistory"
+      shell: cat "{{ ansible_facts['env']['HOME'] }}/.bash_history" >> "{{ ansible_facts['env']['HOME'] }}/.zhistory"
       args:
         executable: /usr/bin/bash
       when: bash_history_file.stat.exists
