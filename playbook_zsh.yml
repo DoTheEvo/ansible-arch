@@ -17,11 +17,11 @@
 
     - name: check if .bash_history exists
       stat:
-        path: "{{ ansible_facts['env']['HOME'] }}/.bash_history"
+        path: "{{ ansible_facts.env.HOME }}/.bash_history"
       register: bash_history_file
 
     - name: add content from .bash_history to .zhistory
-      shell: cat "{{ ansible_facts['env']['HOME'] }}/.bash_history" >> "{{ ansible_facts['env']['HOME'] }}/.zhistory"
+      shell: cat "{{ ansible_facts.env.HOME }}/.bash_history" >> "{{ ansible_facts.env.HOME }}/.zhistory"
       args:
         executable: /usr/bin/bash
       when: bash_history_file.stat.exists
@@ -60,3 +60,15 @@
         path: ~/.zshrc
         line: 'source ~/.myownrc'
 
+    - name: add common commands to zsh history
+      blockinfile:
+        path: "{{ ansible_facts.env.HOME }}/.zhistory"
+        block: |
+          sudo reboot now
+          sudo shutdown now
+          sudo pacman -Sy archlinux-keyring
+          sudo chown $USER:$USER
+          sudo chmod +x
+        create: yes
+        mode: '0600'
+        marker: "# {mark} playbook_zsh added commands history"

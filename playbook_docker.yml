@@ -48,16 +48,15 @@
             ]
           }
 
-    - name: Check if .zhistory exists
-      become: false
-      stat:
-        path: "{{ lookup('env', 'HOME') }}/.zhistory"
-      register: zhistory_file
+    - name: restart docker service
+      systemd:
+        name: docker
+        state: restarted
 
-    - name: Add common commands to zsh history
+    - name: add common commands to zsh history
       become: false
       blockinfile:
-        path: /home/spravca/.zhistory
+        path: "~{{ ansible_user }}/.zhistory"
         block: |
           docker compose up -d
           docker compose up -d --force-recreate
@@ -66,12 +65,6 @@
           docker network create caddy_net
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
-          sudo reboot now
-          sudo shutdown now
-          sudo pacman -Sy archlinux-keyring
-          sudo chown $USER:$USER
-          sudo chmod +x
         create: yes
         mode: '0600'
-        marker: "# {mark} ansible_user added commands"
-      when: zhistory_file.stat.exists
+        marker: "# {mark} playbook_docker added commands history"
