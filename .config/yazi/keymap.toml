@@ -1,0 +1,22 @@
+[mgr]
+prepend_keymap = [
+  # GO TO LOCATIONS
+  { on = [ "g", "e" ], run = "cd /etc", desc = "Go to /etc" },
+  { on = [ "g", "m" ], run = "cd /mnt", desc = "Go to /mnt" },
+  { on = [ "g", "o" ], run = "cd /opt", desc = "Go to /opt" },
+  { on = [ "g", "t" ], run = "cd /tmp", desc = "Go to /tmp" },
+  { on = [ "g", "v" ], run = "cd /var", desc = "Go to /var" },
+  { on = [ "g", "l" ], run = "cd /var/log", desc = "Go to /var/log" },
+  { on = [ "g", "d" ], run = "cd ~/docker", desc = "Go to ~/docker" },
+  { on = [ "g", "s" ], run = "cd /etc/systemd", desc = "Go to /etc/systemd" },
+  # BASIC FUNCTIONS KEYS
+  { on = [ "e" ], run = "open", desc = "Edit file" },
+  { on = [ "p" ], run = [ "paste", "unyank" ], desc = "Paste and clear yank register" },
+  { on = [ "<C-w>" ], run = "close", desc = "Close current tab" },
+  { on = [ "!" ], run = 'shell "$SHELL" --block', desc = "Open shell here" },
+  { on = [ "<Home>" ], run = "arrow -99999999", desc = "Jump to first item" },
+  { on = [ "<End>" ], run = "arrow 99999999", desc = "Jump to last item" },
+  { on = [ "<Delete>" ], run = "remove", desc = "Delete selected files" },
+  # PLUGINS USED
+  { on = [ "<Enter>" ], run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+]

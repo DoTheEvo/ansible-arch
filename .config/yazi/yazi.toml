@@ -1,0 +1,8 @@
+[mgr]
+show_hidden = true
+sort_by = "natural"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+ratio = [0, 4, 0]
+linemode = "size_and_mtime"

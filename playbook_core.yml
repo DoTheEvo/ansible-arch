@@ -35,6 +35,7 @@
           - inxi                    # system info
           - duf                     # prettier df
           - dysk                    # filesystem info
+          - parted                  # disk partitioning
           - ncdu                    # investigate disk space usage
           - htop                    # resource monitor
           - btop                    # better resource monitor

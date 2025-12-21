@@ -54,6 +54,36 @@ export NNN_PLUG='f:fzcd;'   # to use fzf in nnn press ";f"
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
 
 # ----------------------------------------------------------------------------
+# YAZI FILE MANAGER  ----------------------------------------------------------
+
+# for yazi to exit in the current directory
+function yazi() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+
+# yazi starts in docker directory if it exists
+starting_dir=$(find $HOME -maxdepth 1 -type d -iname "docker" | head -n 1)
+if [ -n "$starting_dir" ] && [ -d "$starting_dir" ]; then
+    alias y="yazi $starting_dir"
+    alias yy="yazi $starting_dir"
+else
+    alias y="yazi"
+    alias yy="yazi"
+fi
+
+# indicate shell was spawned by yazi
+if [ -n "$YAZI_ID" ]; then
+    PS1="[Ψ] $PS1"
+fi
+
+# as root but with $USER variables
+alias yyy='sudo -E yazi'
+
+# ----------------------------------------------------------------------------
 # ZSH CUSTOM HOTKEYS ---------------------------------------------------------
 
 # ctr+f prepends sudo on current line
@@ -72,6 +102,14 @@ export COLORTERM=truecolor
 
 # hide temporary filesystem for cleaner output
 alias duf='duf -hide-fs tmpfs'
+
+# ----------------------------------------------------------------------------
+# YT-DLP ---------------------------------------------------------------------
+
+alias you='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -f "bestvideo[height=1440]+bestaudio/bestvideo[height<=1080]+bestaudio/best"'
+alias you2='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -f "bestvideo[height=1080]+bestaudio/best[height=1080]/bestvideo[height<=1080]+bestaudio/best[height<=1080]"'
+alias you3='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv'
+alias youp='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -o "%(playlist_index)s_ %(title)s.%(ext)s"'
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
