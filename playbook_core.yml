@@ -417,6 +417,12 @@
       register: networkd_status
       ignore_errors: yes
 
+    - name: Check if any .network file already contains PermanentMACAddress
+      shell: grep -q "^PermanentMACAddress=" /etc/systemd/network/*.network 2>/dev/null
+      register: mac_already_configured
+      ignore_errors: yes
+      changed_when: false
+
     - block:
 
         - name: Starting MAC-based network conversion
@@ -451,6 +457,7 @@
 
       when:
         - networkd_status.stdout == "active"
+        - mac_already_configured.rc != 0
 
 # SETUP MICRO TEXT EDITOR  ---------------------------------------------------
 
@@ -492,5 +499,39 @@
         block: |
           export EDITOR=micro
           export VISUAL=micro
+
+
+# YAZI FILE MANAGER  ---------------------------------------------------
+
+    - name: install yazi terminal file manager
+      pacman:
+        name:
+          - yazi
+
+    - name: copy config directory with prefernces, hotkeys, plugins
+      become: no
+      copy:
+        src: .config/yazi
+        dest: ~/.config
+        mode: preserve
+
+    - name: ensure /root/.config exists
+      file:
+        path: /root/.config
+        state: directory
+        mode: '0755'
+
+    - name: remove root yazi config if it exists
+      file:
+        path: /root/.config/yazi
+        state: absent
+
+    - name: symlink users yazi config for the root, so that it works in sudo
+      file:
+        src: "/home/{{ ansible_user }}/.config/yazi"
+        dest: /root/.config/yazi
+        state: link
+        force: yes
+        follow: false
 
 #  ---------------------------------------------------------------------------

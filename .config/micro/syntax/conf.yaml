@@ -5,7 +5,8 @@ filetype: conf
 
 detect:
     # added match to any file without extension containing "conf"
-    filename: "(\\.(conf)$|\\.(cfg)$|\\.(env)$|^[^.]*conf[^.]*$)"
+    # filename: "(\\.(conf)$|\\.(cfg)$|\\.(env)$|^[^.]*conf[^.]*$)"
+    filename: "(\\.(conf)$|\\.(cfg)$|\\.(env)$|^[^.]*conf[^.]*$|\\..*rc$)"
 
 rules:
     # Punctuation
