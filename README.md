@@ -273,3 +273,23 @@ https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be
 # to do
 
 * switch from nnn to yazi 
+
+Yazi workflow
+
+* run with `zz` or `yy`, I picked z cuz its easier<br>
+  starts in `~/docker` if it exists
+* run with `zzz` or `yyy` to run as root with current user variables
+* to search in yazi, I mostly use f-filter and z - for fzf
+  * `/` - classical search in current pane, `n` goes to next result
+  * `f` - filter, only leaves results fitting the pattern visible
+  * `z` - opens fzf with fd, for search in current directory and all its subdirectories
+  * `s` - search using fd
+* press `g` - go-to dialogue to see bookmarked places 
+* zoxide integration
+  * install zoxide
+  * for my zsh+zimfw I need to<br>
+    `echo "zmodule kiesman99/zim-zoxide" >> ~/.zimrc`
+  * exit and log in back
+  now one would need to start using `z` instead of `cd`,
+  but entire point of file manger is that you dont really do cd much anyway
+

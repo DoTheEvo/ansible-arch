@@ -18,6 +18,14 @@ alias wgs='wg show'
 # wireguard - brings down current active wireguard interface
 # to not need sudo edit sudoers
 alias wgd='wg show interfaces | xargs -n1 sudo wg-quick down'
+# make locate case insensitive by default
+alias locate='locate -i'
+
+# ----------------------------------------------------------------------------
+# FD  -----------------------------------------------------------------------
+
+# fd is simpler and faster find command, but to really show everything
+alias fd='fd --hidden --no-ignore --ignore-case'
 
 # ----------------------------------------------------------------------------
 # FZF  -----------------------------------------------------------------------
@@ -25,7 +33,7 @@ alias wgd='wg show interfaces | xargs -n1 sudo wg-quick down'
 # fzf just filters whatever default command gives it
 # fd is simpler and faster find command so it is used
 # can be used in nnn with ";" and "f", or anywhere with "fzf"
-export FZF_DEFAULT_COMMAND='fd --hidden'
+export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore --ignore-case'
 export FZF_DEFAULT_OPTS="--exact"
 
 # ----------------------------------------------------------------------------
@@ -66,14 +74,11 @@ function yazi() {
 }
 
 # yazi starts in docker directory if it exists
-starting_dir=$(find $HOME -maxdepth 1 -type d -iname "docker" | head -n 1)
-if [ -n "$starting_dir" ] && [ -d "$starting_dir" ]; then
-    alias y="yazi $starting_dir"
-    alias yy="yazi $starting_dir"
-else
-    alias y="yazi"
-    alias yy="yazi"
-fi
+starting_dir="$HOME" # could be empty if starting where launched
+found_docker=$(find "$HOME" -maxdepth 1 -type d -iname docker -print -quit)
+[[ -n $found_docker ]] && starting_dir="$found_docker"
+alias yy="yazi $starting_dir"
+alias zz=yy
 
 # indicate shell was spawned by yazi
 if [ -n "$YAZI_ID" ]; then
@@ -82,6 +87,7 @@ fi
 
 # as root but with $USER variables
 alias yyy='sudo -E yazi'
+alias zzz='sudo -E yazi'
 
 # ----------------------------------------------------------------------------
 # ZSH CUSTOM HOTKEYS ---------------------------------------------------------

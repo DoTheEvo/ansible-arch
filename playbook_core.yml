@@ -25,6 +25,7 @@
           - curl                    # download utility
           - wget                    # download utility
           - rsync                   # copy utility
+          - yazi                    # file manager
           - nnn                     # file manager
           - fd                      # simpler find
           - fzf                     # fuzzy filter, useful for file search
@@ -297,6 +298,7 @@
       systemd:
         name: reflector.service
         state: started
+      ignore_errors: yes
 
 # LOGROTATE  -----------------------------------------------------------------
 
@@ -420,7 +422,7 @@
     - name: Check if any .network file already contains PermanentMACAddress
       shell: grep -q "^PermanentMACAddress=" /etc/systemd/network/*.network 2>/dev/null
       register: mac_already_configured
-      ignore_errors: yes
+      failed_when: mac_already_configured.rc > 1  # Only fail on actual errors (rc=2)
       changed_when: false
 
     - block:
