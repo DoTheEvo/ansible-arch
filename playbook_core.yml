@@ -133,6 +133,11 @@
         validate: /usr/sbin/visudo -cf %s
         create: yes
 
+    - name: 24h instead of AM/PM system-wide
+      become: yes
+      command: localectl set-locale LC_TIME=C
+
+
 # USERS PERMISSIONS  ---------------------------------------------------------
 
     - name: add the user to the root group, to be able to enter directories
