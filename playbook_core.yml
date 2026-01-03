@@ -19,7 +19,7 @@
         update_cache: yes
         name:
           - nano                    # editor
-          - micro                   # editor
+          - micro                   # a better modern editor
           - man-db                  # help pages
           - git                     # to clone github repos
           - curl                    # download utility

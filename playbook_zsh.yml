@@ -69,6 +69,7 @@
           sudo pacman -Sy archlinux-keyring
           sudo chown $USER:$USER
           sudo chmod +x
+          sudo chmod -R u=rwX,go=rX .
         create: yes
         mode: '0600'
         marker: "# {mark} playbook_zsh added commands history"

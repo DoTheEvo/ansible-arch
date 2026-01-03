@@ -21,6 +21,15 @@ alias wgd='wg show interfaces | xargs -n1 sudo wg-quick down'
 # make locate case insensitive by default
 alias locate='locate -i'
 
+# lsblk to include labels by default but allow normal use
+lsblk() {
+    if [[ $# -eq 0 ]]; then
+        command lsblk -o LABEL,NAME,SIZE,TYPE,MOUNTPOINT
+    else
+        command lsblk "$@"
+    fi
+}
+
 # ----------------------------------------------------------------------------
 # FD  -----------------------------------------------------------------------
 
