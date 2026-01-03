@@ -18,6 +18,7 @@
       pacman:
         update_cache: yes
         name:
+          - base-devel              # for AUR packages
           - nano                    # editor
           - micro                   # a better modern editor
           - man-db                  # help pages
