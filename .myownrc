@@ -101,13 +101,22 @@ alias zzz='sudo -E yazi'
 # ----------------------------------------------------------------------------
 # ZSH CUSTOM HOTKEYS ---------------------------------------------------------
 
-# ctr+f prepends sudo on current line
+# ctr+s prepends sudo on current line
+stty -ixon  # allows to bind ctrl+s as it should freeze/pause terminal
 add_sudo (){
     BUFFER="sudo $BUFFER"
     zle -w end-of-line
 }
 zle -N add_sudo
-bindkey "^f" add_sudo
+bindkey "^s" add_sudo
+
+# ctr+f prepends sudo micro on current line
+add_sudo_micro (){
+    BUFFER="sudo micro $BUFFER"
+    zle -w end-of-line
+}
+zle -N add_sudo_micro
+bindkey "^f" add_sudo_micro
 
 # ----------------------------------------------------------------------------
 # DUF ------------------------------------------------------------------------
