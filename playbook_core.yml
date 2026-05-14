@@ -500,11 +500,11 @@
         force: yes
         follow: false
 
-    - name: set default editor in .bashrc
-      become: no
-      blockinfile:
-        path: ~/.bashrc
-        block: |
+    - name: set default editor system-wide
+      copy:
+        dest: /etc/profile.d/editor.sh
+        mode: '0644'
+        content: |
           export EDITOR=micro
           export VISUAL=micro
 

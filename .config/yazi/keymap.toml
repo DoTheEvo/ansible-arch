@@ -10,7 +10,8 @@ prepend_keymap = [
   { on = [ "g", "d" ], run = "cd ~/docker", desc = "Go to ~/docker" },
   { on = [ "g", "s" ], run = "cd /etc/systemd", desc = "Go to /etc/systemd" },
   # BASIC FUNCTIONS KEYS
-  { on = [ "e" ], run = "open", desc = "Edit file" },
+  # { on = [ "e" ], run = "open", desc = "Edit file" },
+  { on = [ "e" ], run = 'shell "$EDITOR \"$@\"" --block', desc = "Edit file" },
   { on = [ "p" ], run = [ "paste", "unyank" ], desc = "Paste and clear yank register" },
   { on = [ "<C-w>" ], run = "close", desc = "Close current tab" },
   { on = [ "!" ], run = 'shell "$SHELL" --block', desc = "Open shell here" },

@@ -286,3 +286,5 @@ Yazi workflow
   * `s` - search using fd
 * press `g` - go-to dialogue to see bookmarked places 
 * `a` - create file, or end it with `/` to create folder
+* `y` - copy selected file, `p` - paste that file
+* `t` - new tab
