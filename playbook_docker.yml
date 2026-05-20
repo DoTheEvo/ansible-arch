@@ -62,6 +62,7 @@
           docker compose up -d --force-recreate
           docker compose down
           docker compose pull
+          docker image prune
           docker network create caddy_net
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
