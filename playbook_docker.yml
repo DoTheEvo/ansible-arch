@@ -67,6 +67,8 @@
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
           ctop
+          dcu
+          dcd
         create: yes
         mode: '0600'
         marker: "# {mark} playbook_docker added commands history"
