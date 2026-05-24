@@ -98,6 +98,10 @@ fi
 alias yyy='sudo -E yazi'
 alias zzz='sudo -E yazi'
 
+# DOCKER ALIASES
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+
 # ----------------------------------------------------------------------------
 # ZSH CUSTOM HOTKEYS ---------------------------------------------------------
 

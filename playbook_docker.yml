@@ -66,6 +66,7 @@
           docker network create caddy_net
           docker exec -w /etc/caddy caddy caddy reload
           docker exec -w /etc/caddy caddy caddy fmt -overwrite
+          ctop
         create: yes
         mode: '0600'
         marker: "# {mark} playbook_docker added commands history"
