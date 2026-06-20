@@ -165,7 +165,7 @@ launched by `n` command, or `nnnn` to run it as root, but with user ENVS
   osc52 = "CopyPaste"
   ```
 
-After that ctrl+c and ctr+v just work.<br>
+After that ctrl+c and ctr+v work reliably.<br>
 The `playbook_core.yml` takes care of setting up micro,
 for the user and for the root.
 
@@ -288,3 +288,4 @@ Yazi workflow
 * `a` - create file, or end it with `/` to create folder
 * `y` - copy selected file, `p` - paste that file
 * `t` - new tab
+* `,` and then `S` - sorts by size which shows folder size
