@@ -238,11 +238,15 @@
         dest: '/etc/systemd/system/trash-empty.service'
         content: |
           [Unit]
+          # Empties trash for every user (including root) daily.
+          # Fixes ownership first since sudo-run deletes can leave
+          # root-owned files in a user's trash, which would otherwise
+          # make trash-empty crash and skip everything after it.
           Description=Empty trash older than 30 days
 
           [Service]
           Type=oneshot
-          ExecStart=/usr/bin/trash-empty 30
+          ExecStart=/bin/bash -c 'for home in /root /home/*; do user=$(basename "$home"); [ "$home" = "/root" ] && user=root; trash_dir="$home/.local/share/Trash"; if [ -d "$trash_dir" ]; then chown -R "$user":"$user" "$trash_dir"; sudo -u "$user" trash-empty 30 2>>/var/log/trash-empty-errors.log; fi; done; exit 0'
 
     - name: create trash-empty.timer file
       copy:
