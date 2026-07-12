@@ -134,7 +134,7 @@ to *change* 143 virtual machines somewhere on the cloud.
 To go from local to remote, edit inventory, replace local entries
 with IPs of machines you want to *change*.
 
-### Personal workflow
+# Personal workflow
 
 <video
   src="https://github.com/user-attachments/assets/aea0665a-4276-491c-89d3-9cbdf578576e"
@@ -144,7 +144,7 @@ with IPs of machines you want to *change*.
 
 The core application is yazi file manager.<br>
 
-* run with `zz` or `yy`, I picked z cuz its easier<br>
+* run with `zz` or `yy`, I picked z cuz its more reachable, plus the Z sound in yazi<br>
   run with `zzz` or `yyy` to run as root with current user variables<br>
   yazi starts in `~/docker` if the directory exists
 * `e` - to edit selected file in micro text editor,
@@ -156,23 +156,25 @@ The core application is yazi file manager.<br>
 * to search in yazi, I mostly use `f` - filter or `z` - for fzf
   * `f` - filter, only leaves results fitting the pattern visible
   * `/` - classical search in the current pane, `n` goes to next result
-  * `z` - opens fzf with fd, for search in current directory and all its subdirectories
+  * `z` - opens fzf with fd, for search in current directory and all its subdirectories,
+    only files not directories
   * `s` - search using fd
-* press `g` - go-to dialogue to see bookmarked places 
-* `a` - creates a file, if the name ends with `/` it creates a folder
+* press `g` - go-to dialogue to see bookmarked places, they are defined in yazi `keymap.toml` 
+* `a` - creates a file, if the name ends with `/` it creates a directory
 * `y` - copy selected file, `p` - paste that file<br>
-  whats nice that if a file with the name exist it ads `_1` to the new copy the copy
+  whats nice that if a file with the name exist it ads `_1` to the new copy,
   which makes for quick and easy creation of a backup of a file before editing it<br>
   `x` moves the file
 * `t` - a new tab
-* `,` and then `S` - sorts by size which shows folder size
+* `,` and then `S` - sorts by size which shows directories size
 
-In the shell one can also use locate to searh for something - `locate caddyfile`<br>
+In the shell one can also use locate to search for something - `locate caddyfile`<br>
 alias is sets so that locate is not case sensitive<br>
 locate(plocate) updates its databases every 12h
 
-I use ctrl+s hotkey to add sudo to the begining current line,
-or ctrl+f to prepend `sudo micro` for text editor.
+I use ctrl+s hotkey to add `sudo` to the begining current line,
+or ctrl+f to prepend `sudo micro` for text editor.<br>
+Theses are defined in `.myownrc` for the zsh shell.
 
 ### Micro copy paste when SSH
 
