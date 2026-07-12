@@ -66,7 +66,8 @@ useful terminal programs, settings, maintenance services
 * install yay to have access to AUR<br>
   set - remove make dependencies, always clean builds, cleanup after
 * in pacman.conf enable color
-* in makepkg.conf disable compression and enable parallel compilation
+* in makepkg.conf disable compression, enable parallel compilation,
+  disable building of debug version of a package
 * increase allowed failed login attempts to 10 before lock out
 * enable members of wheel group to sudo
 * add current user to root group and disable need for entering sudo password
@@ -81,13 +82,12 @@ useful terminal programs, settings, maintenance services
     * paccache - weekly clearing of pacman cache
     * reflector - weekly update of mirrorlist - !!change the country codes!!
     * logrotate - if need to prevent logs from growing
-* check if in virtual machine and if vmware, hyperv, or virtualbox then
-  install and enable supporting services
+* check if running in a virtual machine and if detects vmware, hyperv, virtualbox
+  or XCPNG, then install and enable supporting services
 * network setup changes
   * change systemd network config, using mac insted of interface name,
     this avoids issues on hardware changes
   * disable DNSSEC that was enabled in september 2025
-  * 
 * install micro text editor, copy config, keybinds, syntax highlight
   set micro as the default editor in `.bashrc`
 
@@ -136,21 +136,43 @@ with IPs of machines you want to *change*.
 
 ### Personal workflow
 
-The core application is `nnn` file manager.<br>
-launched by `n` command, or `nnnn` to run it as root, but with user ENVS
+<video
+  src="https://github.com/user-attachments/assets/aea0665a-4276-491c-89d3-9cbdf578576e"
+  controls
+  width="900">
+</video>
 
-* nnn is configured through exports in `.myownrc` file and through flags
-  used in the `n` and `nnnn`
-* `?` key - shows hotkeys, can also see what bookmarks are set<br>
-  bookmarks are used by pressing 'b' and then one of the offered letters,
-  like 'h' for home or 'e' for /etc
-* `!` key - opens terminal in the current directory, to return back to `nnn`
-  press `ctrl+d`, there is `N1` indication that we are in a terminal opened
-  from under `nnn`
-* `e` key - edits currently selected file in preset editor - micro for me
-* `;f` keys - open fzf file search in current directory,
-* `d` key - switches to detail view, pressing `t` and `d` shows directories size
+The core application is yazi file manager.<br>
 
+* run with `zz` or `yy`, I picked z cuz its easier<br>
+  run with `zzz` or `yyy` to run as root with current user variables<br>
+  yazi starts in `~/docker` if the directory exists
+* `e` - to edit selected file in micro text editor,
+* `space` - select multiple files
+  `ctrl+q` - to exit micro and be back to yazi
+* `!` key (shift+1) - opens a terminal in the current directory,
+  `ctrl+d` to return back to yazi,<br>
+  there is `[Ψ]` indicator that we are in a terminal opened under yazi
+* to search in yazi, I mostly use `f` - filter or `z` - for fzf
+  * `f` - filter, only leaves results fitting the pattern visible
+  * `/` - classical search in the current pane, `n` goes to next result
+  * `z` - opens fzf with fd, for search in current directory and all its subdirectories
+  * `s` - search using fd
+* press `g` - go-to dialogue to see bookmarked places 
+* `a` - creates a file, if the name ends with `/` it creates a folder
+* `y` - copy selected file, `p` - paste that file<br>
+  whats nice that if a file with the name exist it ads `_1` to the new copy the copy
+  which makes for quick and easy creation of a backup of a file before editing it<br>
+  `x` moves the file
+* `t` - a new tab
+* `,` and then `S` - sorts by size which shows folder size
+
+In the shell one can also use locate to searh for something - `locate caddyfile`<br>
+alias is sets so that locate is not case sensitive<br>
+locate(plocate) updates its databases every 12h
+
+I use ctrl+s hotkey to add sudo to the begining current line,
+or ctrl+f to prepend `sudo micro` for text editor.
 
 ### Micro copy paste when SSH
 
@@ -215,12 +237,16 @@ bunch of linux commands
 * **Weekly hang-up because swap was off**. Archlinux VM docker host experienced
   [huge spike of constant disk use](https://i.imgur.com/2NWXpu8.png)
   which was cause by the lack of SWAP. After adding 6GB swap file it was rock solid.
-* If **running arch without update for a long time** - `sudo pacman -Sy archlinux-keyring`
-  before updating everything else with `pacman -Syu`.<br>
-  Enabling `archlinux-keyring-wkd-sync.timer` will update the package weekly.
-  It's part of the core playbook.<br>
-  It's run history be checked - `journalctl -ru archlinux-keyring-wkd-sync.timer`
-* To **update zim** zsh framework- `zimfw upgrade` and `zimfw update`.
+* If **running arch without update for a long time**
+  * `sudo systemctl start reflector.service` - updates mirrorlist assuming reflector is setup
+  * `sudo pacman -Sy archlinux-keyring` - updates package signing keys
+  * `sudo pacman -Syu` update everything<br>
+  
+  service `archlinux-keyring-wkd-sync.timer` updates the package weekly,
+  but I had cases where the machine was off for a year...
+  It's run history can be checked - `journalctl -ru archlinux-keyring-wkd-sync.timer`
+* To **update zim** zsh framework - `zimfw --version` version check,
+  `zimfw upgrade` and `zimfw update` for packages.
 
 # disk commands
 
@@ -272,20 +298,21 @@ https://www.reddit.com/r/archlinux/comments/1fykml6/some_aliases_ive_found_to_be
 
 # to do
 
-* switch from nnn to yazi 
+...
 
-Yazi workflow
+# nnn
 
-* run with `zz` or `yy`, I picked z cuz its easier<br>
-  starts in `~/docker` if it exists
-* run with `zzz` or `yyy` to run as root with current user variables
-* to search in yazi, I mostly use f-filter and z - for fzf
-  * `/` - classical search in current pane, `n` goes to next result
-  * `f` - filter, only leaves results fitting the pattern visible
-  * `z` - opens fzf with fd, for search in current directory and all its subdirectories
-  * `s` - search using fd
-* press `g` - go-to dialogue to see bookmarked places 
-* `a` - create file, or end it with `/` to create folder
-* `y` - copy selected file, `p` - paste that file
-* `t` - new tab
-* `,` and then `S` - sorts by size which shows folder size
+switched to yazi, but will leave the info on nnn too<br>
+launched by `n` command, or `nnnn` to run it as root, but with user ENVS
+
+* nnn is configured through exports in `.myownrc` file and through flags
+  used in the `n` and `nnnn`
+* `?` key - shows hotkeys, can also see what bookmarks are set<br>
+  bookmarks are used by pressing 'b' and then one of the offered letters,
+  like 'h' for home or 'e' for /etc
+* `!` key - opens terminal in the current directory, to return back to `nnn`
+  press `ctrl+d`, there is `N1` indication that we are in a terminal opened
+  from under `nnn`
+* `e` key - edits currently selected file in preset editor - micro for me
+* `;f` keys - open fzf file search in current directory,
+* `d` key - switches to detail view, pressing `t` and `d` shows directories size

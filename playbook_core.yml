@@ -20,14 +20,14 @@
         name:
           - base-devel              # for AUR packages
           - nano                    # editor
-          - micro                   # a better modern editor
+          - micro                   # better editor
           - man-db                  # help pages
           - git                     # to clone github repos
           - curl                    # download utility
           - wget                    # download utility
           - rsync                   # copy utility
-          - yazi                    # file manager
           - nnn                     # file manager
+          - yazi                    # better file manager
           - fd                      # simpler find
           - fzf                     # fuzzy filter, useful for file search
           - bat                     # prettier cat

@@ -129,7 +129,7 @@ bindkey "^f" add_sudo_micro
 export COLORTERM=truecolor
 
 # hide temporary filesystem for cleaner output
-alias duf='duf -hide-fs tmpfs'
+alias duf='duf --hide special'
 
 # ----------------------------------------------------------------------------
 # YT-DLP ---------------------------------------------------------------------
