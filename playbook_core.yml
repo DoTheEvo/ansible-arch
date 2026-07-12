@@ -58,6 +58,50 @@
           - fuse                    # mounting file systems
           - sqlite                  # simple database and utilities for it
 
+# SYSTEM SETTINGS CHANGES ----------------------------------------------------
+
+    - name: pacman - enable color
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^#Color$'
+        line: 'Color'
+
+    - name: makepkg - disable compression
+      lineinfile:
+        path: /etc/makepkg.conf
+        regexp: "PKGEXT='.pkg.tar.zst'"
+        line: "PKGEXT='.pkg.tar'"
+
+    - name: makepkg - enable parallel compilation MAKEFLAGS="-j$(nproc)"
+      lineinfile:
+        path: /etc/makepkg.conf
+        regexp: '#MAKEFLAGS="-j2"'
+        line: 'MAKEFLAGS="-j$(nproc)"'
+
+    - name: makepkg - disable debug package generation
+      replace:
+        path: /etc/makepkg.conf
+        regexp: '^(OPTIONS=\([^)]*?)(?<!!)\bdebug\b'
+        replace: '\1!debug'
+
+    - name: change number of failed logins that triger 10min lockout
+      lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: '^# deny = 3$'
+        line: 'deny = 10'
+
+    - name: enable members of wheel group to sudo
+      lineinfile:
+        path: /etc/sudoers.d/98_wheel_allow_sudo
+        state: present
+        line: "%wheel ALL=(ALL:ALL) ALL"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+
+    - name: 24h instead of AM/PM system-wide
+      become: yes
+      command: localectl set-locale LC_TIME=C
+
 # YAY TO ACCESS AUR REPOSITORY  ----------------------------------------------
 
     - name: disable need for password for pacman to allow yay install
@@ -92,45 +136,6 @@
       shell: yay -Y --answerclean All --removemake --cleanafter --save
       args:
         executable: /usr/bin/bash
-
-# SYSTEM SETTINGS CHANGES ----------------------------------------------------
-
-    - name: pacman - enable color
-      lineinfile:
-        path: /etc/pacman.conf
-        regexp: '^#Color$'
-        line: 'Color'
-
-    - name: makepkg - disable compression
-      lineinfile:
-        path: /etc/makepkg.conf
-        regexp: "PKGEXT='.pkg.tar.zst'"
-        line: "PKGEXT='.pkg.tar'"
-
-    - name: makepkg - enable parallel compilation MAKEFLAGS="-j$(nproc)"
-      lineinfile:
-        path: /etc/makepkg.conf
-        regexp: '#MAKEFLAGS="-j2"'
-        line: 'MAKEFLAGS="-j$(nproc)"'
-
-    - name: change number of failed logins that triger 10min lockout
-      lineinfile:
-        path: /etc/security/faillock.conf
-        regexp: '^# deny = 3$'
-        line: 'deny = 10'
-
-    - name: enable members of wheel group to sudo
-      lineinfile:
-        path: /etc/sudoers.d/98_wheel_allow_sudo
-        state: present
-        line: "%wheel ALL=(ALL:ALL) ALL"
-        validate: /usr/sbin/visudo -cf %s
-        create: yes
-
-    - name: 24h instead of AM/PM system-wide
-      become: yes
-      command: localectl set-locale LC_TIME=C
-
 
 # USERS PERMISSIONS  ---------------------------------------------------------
 
