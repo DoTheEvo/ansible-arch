@@ -41,8 +41,6 @@
           - ncdu                    # investigate disk space usage
           - htop                    # resource monitor
           - btop                    # better resource monitor
-          # - rocm-smi-lib          # gpu support for btop
-          - glances                 # system monitor
           - sysstat                 # performance monitoring tools, like iostat
           - iotop                   # disk use monitor
           - nethogs                 # network monitor per process
@@ -59,10 +57,6 @@
           - lsof                    # list open files
           - fuse                    # mounting file systems
           - sqlite                  # simple database and utilities for it
-          - python-llfuse           # bindings for fuse mounting
-          - python-pip              # package manager
-          - python-setuptools       # additional packaging tools
-          - python-pexpect          # child application control
 
 # YAY TO ACCESS AUR REPOSITORY  ----------------------------------------------
 
@@ -83,11 +77,10 @@
 
     - name: install yay using makepkg
       become: no
-      expect:
+      shell: makepkg -si --noconfirm
+      args:
         chdir: /tmp/yay-bin
-        command: makepkg -si
-        responses:
-          (?i)Proceed with installation: "y"
+        executable: /usr/bin/bash
 
     - name: re-enable need for password for pacman
       file:
