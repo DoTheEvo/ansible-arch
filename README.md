@@ -136,10 +136,10 @@ with IPs of machines you want to *change*.
 
 # Personal workflow
 
-<video
-  src="https://github.com/user-attachments/assets/aea0665a-4276-491c-89d3-9cbdf578576e"
-  controls
-  width="900">
+<video controls width="900">
+  <source
+    src="https://github.com/user-attachments/assets/aea0665a-4276-491c-89d3-9cbdf578576e"
+    type="video/mp4">
 </video>
 
 The core application is yazi file manager.<br>
