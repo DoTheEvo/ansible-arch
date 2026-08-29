@@ -138,6 +138,5 @@ alias you='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub -
 alias you2='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -f "bestvideo[height=1080]+bestaudio/best[height=1080]/bestvideo[height<=1080]+bestaudio/best[height<=1080]"'
 alias you3='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv'
 alias youp='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -o "%(playlist_index)s_ %(title)s.%(ext)s"'
-
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------

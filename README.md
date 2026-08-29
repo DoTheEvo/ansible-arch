@@ -109,6 +109,8 @@ useful terminal programs, settings, maintenance services
 * enable and start docker service
 * add the current user to the docker group to avoid need for sudo
 * set default max logs size to 250MB and set logs rotation
+* set docker network pool to not get in to 192.168.0.0 space,
+  as the default settings reach it on like 14th new network created
 
 ### [playbook_lts_kernel.yml](https://github.com/DoTheEvo/ansible-arch/blob/main/playbook_lts_kernel.yml)
 
@@ -143,9 +145,9 @@ The core application is yazi file manager.<br>
 * run with `zz` or `yy`, I picked z cuz its more reachable, plus the Z sound in yazi<br>
   run with `zzz` or `yyy` to run as root with current user variables<br>
   yazi starts in `~/docker` if the directory exists
-* `e` - to edit selected file in micro text editor,
-* `space` - select multiple files
+* `e` - to edit selected file in micro text editor<br>
   `ctrl+q` - to exit micro and be back to yazi
+* `space` - select multiple files
 * `!` key (shift+1) - opens a terminal in the current directory,
   `ctrl+d` to return back to yazi,<br>
   there is `[Ψ]` indicator that we are in a terminal opened under yazi
@@ -158,7 +160,7 @@ The core application is yazi file manager.<br>
 * press `g` - go-to dialogue to see bookmarked places, they are defined in yazi `keymap.toml` 
 * `a` - creates a file, if the name ends with `/` it creates a directory
 * `y` - copy selected file, `p` - paste that file<br>
-  whats nice that if a file with the name exist it ads `_1` to the new copy,
+  whats nice is that if a file with the name exist, it ads `_1` to the new copy,
   which makes for quick and easy creation of a backup of a file before editing it<br>
   `x` moves the file
 * `t` - a new tab
