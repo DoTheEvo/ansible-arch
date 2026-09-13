@@ -101,6 +101,7 @@ alias zzz='sudo -E yazi'
 # DOCKER ALIASES
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
+alias dcps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Label \"com.docker.compose.project\"}}\t{{.Label \"com.docker.compose.project.working_dir\"}}"'
 
 # ----------------------------------------------------------------------------
 # ZSH CUSTOM HOTKEYS ---------------------------------------------------------
