@@ -166,17 +166,6 @@
         enabled: yes
         state: started
 
-# NNN ------------------------------------------------------------------------
-
-    - name: install nnn
-      pacman:
-        name:
-          - nnn
-
-    - name: install nnn plugins
-      become: no
-      shell: "curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh"
-
 # LOCATE THE QUICK FILE SEARCH  ----------------------------------------------
 
     - name: install plocate
