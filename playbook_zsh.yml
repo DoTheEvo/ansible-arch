@@ -11,65 +11,59 @@
           - zsh
           - curl
 
-    # BASH HISTORY IS ONLY WRITTEN ON USER EXIT
-    # "history -a" WRITES CURRENT SESSION COMMANDS
-    # IDEALLY EXECUTED RIGHT BEFORE RUNNING THIS PLAYBOOK
-
-    - name: check if .bash_history exists
-      stat:
-        path: "{{ ansible_facts.env.HOME }}/.bash_history"
-      register: bash_history_file
-
-    - name: add content from .bash_history to .zhistory
-      shell: cat "{{ ansible_facts.env.HOME }}/.bash_history" >> "{{ ansible_facts.env.HOME }}/.zhistory"
-      args:
-        executable: /usr/bin/bash
-      when: bash_history_file.stat.exists
-
     - name: change shell
       become: yes
       user:
         name: "{{ ansible_user }}"
         shell: /bin/zsh
 
+    - name: check if zimfw is already installed
+      stat:
+        path: "{{ ansible_facts.env.HOME }}/.zim/zimfw.zsh"
+      register: zimfw_installed
+
     - name: install zimfw using its script
-      ignore_errors: yes
-      register: zimfw_output
       shell: "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
       args:
         executable: /usr/bin/zsh
-      changed_when: "'already exists' not in zimfw_output.stderr"
-      failed_when: false
+      when: not zimfw_installed.stat.exists
 
-    - name: change theme to steeef
-      ignore_errors: yes
+    - name: ensure steeef theme module is in .zimrc
+      lineinfile:
+        path: "{{ ansible_facts.env.HOME }}/.zimrc"
+        line: "zmodule steeef"
+        create: yes
+      register: zimrc_updated
+
+    - name: run zimfw install to apply module changes
+      shell: "zsh -ic 'zimfw install'"
       # to source .zshrc "zsh -ic" is used, otherwise "command not found: zimfw"
-      shell: "zsh -ic 'echo zmodule steeef >> ~/.zimrc && zimfw install'"
       args:
         executable: /usr/bin/zsh
-      register: shell_result
+      when: not zimfw_installed.stat.exists or zimrc_updated.changed
 
     - name: copy .myownrc
       copy:
         src: ./.myownrc
-        dest: ~/.myownrc
+        dest: "{{ ansible_facts.env.HOME }}/.myownrc"
         mode: '0644'
 
     - name: source .myownrc in .zshrc
       lineinfile:
-        path: ~/.zshrc
+        path: "{{ ansible_facts.env.HOME }}/.zshrc"
         line: 'source ~/.myownrc'
+        create: yes
 
     - name: add common commands to zsh history
-      blockinfile:
+      lineinfile:
         path: "{{ ansible_facts.env.HOME }}/.zhistory"
-        block: |
-          sudo reboot now
-          sudo shutdown now
-          sudo pacman -Sy archlinux-keyring
-          sudo chown $USER:$USER
-          sudo chmod +x
-          sudo chmod -R u=rwX,go=rX .
+        line: "{{ item }}"
         create: yes
         mode: '0600'
-        marker: "# {mark} playbook_zsh added commands history"
+      loop:
+        - "sudo reboot now"
+        - "sudo shutdown now"
+        - "sudo pacman -Sy archlinux-keyring"
+        - "sudo chown $USER:$USER"
+        - "sudo chmod +x"
+        - "sudo chmod -R u=rwX,go=rX ."
