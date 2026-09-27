@@ -104,6 +104,12 @@
 
 # YAY TO ACCESS AUR REPOSITORY  ----------------------------------------------
 
+    - name: check if yay is already installed
+      command: which yay
+      register: yay_check
+      changed_when: false
+      failed_when: false
+
     - name: disable need for password for pacman to allow yay install
       lineinfile:
         path: /etc/sudoers.d/temp_allow_no_pswd_pacman
@@ -111,6 +117,7 @@
         line: "ALL ALL=NOPASSWD: /usr/bin/pacman"
         validate: /usr/sbin/visudo -cf %s
         create: yes
+      when: yay_check.rc != 0
 
     - name: git clone yay-bin repo in to /tmp
       become: no
@@ -118,6 +125,7 @@
         repo: 'https://aur.archlinux.org/yay-bin.git'
         dest: /tmp/yay-bin
         clone: yes
+      when: yay_check.rc != 0
 
     - name: install yay using makepkg
       become: no
@@ -125,11 +133,13 @@
       args:
         chdir: /tmp/yay-bin
         executable: /usr/bin/bash
+      when: yay_check.rc != 0
 
     - name: re-enable need for password for pacman
       file:
         path: /etc/sudoers.d/temp_allow_no_pswd_pacman
         state: absent
+      when: yay_check.rc != 0
 
     - name: set yay options to cleanafter package installation
       become: no
@@ -248,6 +258,10 @@
 
           [Install]
           WantedBy=timers.target
+
+    - name: reload systemd daemon
+      systemd:
+        daemon_reload: yes
 
     - name: enable and start trash-empty.timer
       systemd:
@@ -415,6 +429,7 @@
       command: systemctl is-active systemd-networkd
       register: networkd_status
       ignore_errors: yes
+      changed_when: false
 
     - name: Check if any .network file already contains PermanentMACAddress
       shell: grep -q "^PermanentMACAddress=" /etc/systemd/network/*.network 2>/dev/null
@@ -478,10 +493,17 @@
         state: directory
         mode: '0755'
 
-    - name: remove root micro config if it exists
+    - name: check root micro config path
+      stat:
+        path: /root/.config/micro
+        follow: no
+      register: root_micro_config
+
+    - name: remove root micro config if it's a real directory, not a symlink
       file:
         path: /root/.config/micro
         state: absent
+      when: root_micro_config.stat.exists and not root_micro_config.stat.islnk
 
     - name: symlink users micro config for the root, so that it works in sudo
       file:
@@ -520,10 +542,17 @@
         state: directory
         mode: '0755'
 
-    - name: remove root yazi config if it exists
+    - name: check root yazi config path
+      stat:
+        path: /root/.config/yazi
+        follow: no
+      register: root_yazi_config
+
+    - name: remove root yazi config if it's a real directory, not a symlink
       file:
         path: /root/.config/yazi
         state: absent
+      when: root_yazi_config.stat.exists and not root_yazi_config.stat.islnk
 
     - name: symlink users yazi config for the root, so that it works in sudo
       file:
