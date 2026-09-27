@@ -12,6 +12,14 @@
         update_cache: yes
         upgrade: yes
 
+# REMOVE ENCOUNTERED CONFLICTING PACKAGES BEFORE THEIR FRESH INSTALL LATER
+
+    - name: remove packages that conflict with ones this playbook installs
+      pacman:
+        name:
+          - gnu-netcat    # conflicts with openbsd-netcat, both provide 'nc'
+        state: absent
+
 # INSTALL VARIOUS PACKAGES  --------------------------------------------------
 
     - name: install bunch of packages
