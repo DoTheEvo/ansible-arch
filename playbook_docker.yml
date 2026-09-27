@@ -48,27 +48,27 @@
             ]
           }
 
-    - name: restart docker service
-      systemd:
-        name: docker
-        state: restarted
+    # - name: restart docker service
+    #   systemd:
+    #     name: docker
+    #     state: restarted
 
     - name: add common commands to zsh history
       become: false
-      blockinfile:
+      lineinfile:
         path: "~{{ ansible_user }}/.zhistory"
-        block: |
-          docker compose up -d
-          docker compose up -d --force-recreate
-          docker compose down
-          docker compose pull
-          docker image prune
-          docker network create caddy_net
-          docker exec -w /etc/caddy caddy caddy reload
-          docker exec -w /etc/caddy caddy caddy fmt -overwrite
-          ctop
-          dcu
-          dcd
+        line: "{{ item }}"
         create: yes
         mode: '0600'
-        marker: "# {mark} playbook_docker added commands history"
+      loop:
+        - "docker compose up -d"
+        - "docker compose up -d --force-recreate"
+        - "docker compose down"
+        - "docker compose pull"
+        - "docker image prune"
+        - "docker network create caddy_net"
+        - "docker exec -w /etc/caddy caddy caddy reload"
+        - "docker exec -w /etc/caddy caddy caddy fmt -overwrite"
+        - "ctop"
+        - "dcu"
+        - "dcd"
