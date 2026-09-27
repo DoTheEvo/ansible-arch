@@ -444,6 +444,7 @@
       register: mac_already_configured
       failed_when: mac_already_configured.rc > 1  # Only fail on actual errors (rc=2)
       changed_when: false
+      when: networkd_status.stdout == "active"
 
     - block:
 
