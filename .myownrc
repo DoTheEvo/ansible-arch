@@ -30,6 +30,21 @@ lsblk() {
     fi
 }
 
+# pretier results nmap, without arguments scans 10.0.19.0/24,
+# but can take network as an argument - nmq 192.168.5.0/24
+nmq() {
+  sudo nmap -sn -T5 --max-retries 1 "${1:-10.0.19.0/24}" | awk '
+    function flush() { if (ip) printf "%-15s  %-28s  %s\n", ip, name, mac }
+    /scan report/ {
+      flush()
+      if ($6 != "") { name=$5; ip=$6; gsub(/[()]/, "", ip) }
+      else          { name="-"; ip=$5 }
+      mac="(no MAC, routed or local)"
+    }
+    /MAC Address/ { mac=$3 "  " substr($0, index($0,"(")) }
+    END { flush() }' | sort -V
+}
+
 # ----------------------------------------------------------------------------
 # FD  -----------------------------------------------------------------------
 
@@ -135,9 +150,8 @@ alias duf='duf --hide special'
 # ----------------------------------------------------------------------------
 # YT-DLP ---------------------------------------------------------------------
 
-alias you='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -f "bestvideo[height=1440]+bestaudio/bestvideo[height<=1080]+bestaudio/best"'
-alias you2='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -f "bestvideo[height=1080]+bestaudio/best[height=1080]/bestvideo[height<=1080]+bestaudio/best[height<=1080]"'
-alias you3='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv'
-alias youp='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-auto-sub --sub-format srt --merge-output-format mkv -o "%(playlist_index)s_ %(title)s.%(ext)s"'
+alias you='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-subs --write-auto-subs --compat-options no-keep-subs --sub-format srt --merge-output-format mkv --sleep-subtitles 60 -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]/best"'
+alias you2='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-subs --write-auto-subs --compat-options no-keep-subs --sub-format srt --merge-output-format mkv --sleep-subtitles 60 -f "bestvideo[height=1440]+bestaudio/bestvideo[height<=1080]+bestaudio/best"'
+alias youp='yt-dlp --embed-chapters --embed-subs --sub-lang en --write-subs --write-auto-subs --compat-options no-keep-subs --sub-format srt --merge-output-format mkv --sleep-subtitles 60 -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]/best" -o "%(playlist_index)02d_ %(title)s.%(ext)s"'
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
