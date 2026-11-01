@@ -5,6 +5,12 @@ export EDITOR=micro
 export VISUAL=micro
 
 # ----------------------------------------------------------------------------
+# ZSH settings  --------------------------------------------------------------
+
+unsetopt HIST_IGNORE_SPACE    # commands starting with space go in to history
+setopt HIST_REDUCE_BLANKS     # removes superfluous white space
+
+# ----------------------------------------------------------------------------
 # ALIASES  -------------------------------------------------------------------
 
 # show numerical permissions of content of the current directory
